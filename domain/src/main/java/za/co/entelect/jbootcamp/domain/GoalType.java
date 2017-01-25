@@ -1,15 +1,13 @@
 package za.co.entelect.jbootcamp.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="goal_type")
 public class GoalType implements java.io.Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="goal_type_id")
     private int goalTypeId;
 
@@ -37,5 +35,12 @@ public class GoalType implements java.io.Serializable {
 
     public void setGoalType(String goalType) {
         this.goalType = goalType;
+    }
+
+    @Override
+    public String toString() {
+        return "GoalType{" +
+                "goalType='" + goalType + '\'' +
+                '}';
     }
 }

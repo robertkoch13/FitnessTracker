@@ -9,6 +9,7 @@ import java.util.List;
 public class Role implements java.io.Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="role_id")
     private int roleId;
 
@@ -56,5 +57,12 @@ public class Role implements java.io.Serializable {
 
     public void setPermission(List<Permission> permission) {
         this.permission = permission;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

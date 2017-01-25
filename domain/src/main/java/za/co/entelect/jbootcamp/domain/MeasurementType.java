@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class MeasurementType implements java.io.Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="measurement_type_id")
     private int measurementTypeId;
 
@@ -71,5 +72,15 @@ public class MeasurementType implements java.io.Serializable {
 
     public void setMeasurementFrequency(MeasurementFrequency measurementFrequency) {
         this.measurementFrequency = measurementFrequency;
+    }
+
+    @Override
+    public String toString() {
+        return "MeasurementType{" +
+                "name='" + name + '\'' +
+                ", unitOfMeasurement=" + unitOfMeasurement +
+                ", defaultAccuracy=" + defaultAccuracy +
+                ", measurementFrequency=" + measurementFrequency +
+                '}';
     }
 }

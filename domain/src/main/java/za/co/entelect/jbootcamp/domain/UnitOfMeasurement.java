@@ -1,15 +1,13 @@
 package za.co.entelect.jbootcamp.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="unit_of_measurement")
 public class UnitOfMeasurement implements java.io.Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="unit_of_measurement_id")
     private int unitOfMeasurementId;
 
@@ -37,5 +35,12 @@ public class UnitOfMeasurement implements java.io.Serializable {
 
     public void setUnitOfMeasurement(String unitOfMeasurement) {
         this.unitOfMeasurement = unitOfMeasurement;
+    }
+
+    @Override
+    public String toString() {
+        return "UnitOfMeasurement{" +
+                "unitOfMeasurement='" + unitOfMeasurement + '\'' +
+                '}';
     }
 }

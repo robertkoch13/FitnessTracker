@@ -1,15 +1,13 @@
 package za.co.entelect.jbootcamp.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="permission")
 public class Permission implements java.io.Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="permission_id")
     private int permissionId;
 
@@ -36,5 +34,12 @@ public class Permission implements java.io.Serializable {
 
     public void setPermission(String permission) {
         this.permission = permission;
+    }
+
+    @Override
+    public String toString() {
+        return "Permission{" +
+                "permission='" + permission + '\'' +
+                '}';
     }
 }

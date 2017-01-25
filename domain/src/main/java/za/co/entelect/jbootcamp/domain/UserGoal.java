@@ -8,6 +8,7 @@ import java.util.Date;
 public class UserGoal implements java.io.Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_goal_id")
     private int userGoalId;
 
@@ -122,5 +123,14 @@ public class UserGoal implements java.io.Serializable {
 
     public void setMeasurementType(MeasurementType measurementType) {
         this.measurementType = measurementType;
+    }
+
+    @Override
+    public String toString() {
+        return "UserGoal{" +
+                "goalType=" + goalType +
+                ", goalDate=" + goalDate +
+                ", goalValue=" + goalValue +
+                '}';
     }
 }

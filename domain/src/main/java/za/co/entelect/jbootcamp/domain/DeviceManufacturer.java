@@ -9,6 +9,7 @@ import java.util.List;
 public class DeviceManufacturer implements java.io.Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="device_manufacturer_id")
     private int deviceManufacturerId;
 
@@ -47,5 +48,12 @@ public class DeviceManufacturer implements java.io.Serializable {
 
     public void setDevices(List<Device> devices) {
         this.devices = devices;
+    }
+
+    @Override
+    public String toString() {
+        return "DeviceManufacturer{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

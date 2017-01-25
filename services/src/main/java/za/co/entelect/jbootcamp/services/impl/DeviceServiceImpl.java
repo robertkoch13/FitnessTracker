@@ -34,8 +34,7 @@ public class DeviceServiceImpl implements DeviceService {
     public DeviceManufacturer addDeviceManufacturer(String manufacturer) {
         DeviceManufacturer deviceManufacturer = new DeviceManufacturer();
         deviceManufacturer.setName(manufacturer);
-        deviceManufacturerRepository.save(deviceManufacturer);
-        return deviceManufacturer;
+        return deviceManufacturerRepository.save(deviceManufacturer);
     }
 
     @Override
@@ -47,8 +46,7 @@ public class DeviceServiceImpl implements DeviceService {
         device.setDeviceType(deviceType);
         device.setModel(model);
         device.getMeasurementTypes().add(measurementType);
-        deviceRepository.save(device);
-        return device;
+        return deviceRepository.save(device);
     }
 
     @Override
@@ -68,8 +66,7 @@ public class DeviceServiceImpl implements DeviceService {
         measurementType.setDefaultAccuracy(accuracy);
         measurementType.setMeasurementFrequency(measurementFrequency);
         measurementType.setUnitOfMeasurement(unitOfMeasurement);
-        measurementTypeRepository.save(measurementType);
-        return measurementType;
+        return measurementTypeRepository.save(measurementType);
     }
 
     @Override
@@ -77,8 +74,7 @@ public class DeviceServiceImpl implements DeviceService {
     public MeasurementFrequency addMeasurementFrequency(String frequency) {
         MeasurementFrequency measurementFrequency = new MeasurementFrequency();
         measurementFrequency.setFrequency(frequency);
-        measurementFrequencyRepository.save(measurementFrequency);
-        return measurementFrequency;
+        return measurementFrequencyRepository.save(measurementFrequency);
     }
 
     @Override
@@ -86,8 +82,7 @@ public class DeviceServiceImpl implements DeviceService {
     public UnitOfMeasurement addUnitOfMeasurement(String unitOfMeasurement) {
         UnitOfMeasurement measurementUnit = new UnitOfMeasurement();
         measurementUnit.setUnitOfMeasurement(unitOfMeasurement);
-        unitOfMeasurementRepository.save(measurementUnit);
-        return measurementUnit;
+        return unitOfMeasurementRepository.save(measurementUnit);
     }
 
     @Override

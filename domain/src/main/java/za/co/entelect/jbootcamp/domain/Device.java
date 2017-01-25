@@ -9,6 +9,7 @@ import java.util.List;
 public class Device implements java.io.Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="device_id")
     private int deviceId;
 
@@ -95,6 +96,8 @@ public class Device implements java.io.Serializable {
         return "Device{" +
                 "deviceName='" + deviceName + '\'' +
                 ", deviceManufacturer=" + deviceManufacturer +
+                ", deviceType=" + deviceType +
+                ", model='" + model + '\'' +
                 '}';
     }
 }

@@ -10,6 +10,7 @@ import java.util.List;
 public class UserFitnessProfile implements java.io.Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_id")
     private int userId;
 
@@ -121,5 +122,14 @@ public class UserFitnessProfile implements java.io.Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "UserFitnessProfile{" +
+                "gender='" + gender + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", systemOfMeasurementPreference='" + systemOfMeasurementPreference + '\'' +
+                '}';
     }
 }

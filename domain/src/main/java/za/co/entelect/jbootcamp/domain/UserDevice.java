@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class UserDevice implements java.io.Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_device_id")
     private int userDeviceId;
 
@@ -83,5 +84,14 @@ public class UserDevice implements java.io.Serializable {
 
     public void setUserFitnessProfile(UserFitnessProfile userFitnessProfile) {
         this.userFitnessProfile = userFitnessProfile;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDevice{" +
+                "device=" + device +
+                ", name='" + name + '\'' +
+                ", serialNumber='" + serialNumber + '\'' +
+                '}';
     }
 }

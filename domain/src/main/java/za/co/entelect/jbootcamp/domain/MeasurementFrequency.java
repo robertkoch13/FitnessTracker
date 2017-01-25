@@ -1,15 +1,13 @@
 package za.co.entelect.jbootcamp.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="measurement_frequency")
 public class MeasurementFrequency implements java.io.Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="measurement_frequency_id")
     private int measurementFrequencyId;
 
@@ -36,5 +34,12 @@ public class MeasurementFrequency implements java.io.Serializable {
 
     public void setFrequency(String frequency) {
         this.frequency = frequency;
+    }
+
+    @Override
+    public String toString() {
+        return "MeasurementFrequency{" +
+                "frequency='" + frequency + '\'' +
+                '}';
     }
 }

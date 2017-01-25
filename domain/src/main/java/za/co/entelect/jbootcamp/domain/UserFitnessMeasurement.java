@@ -8,6 +8,7 @@ import java.util.Date;
 public class UserFitnessMeasurement implements java.io.Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_fitness_measurement_id")
     private int userFitnessMeasurementId;
 
@@ -96,5 +97,16 @@ public class UserFitnessMeasurement implements java.io.Serializable {
 
     public void setUserFitnessProfile(UserFitnessProfile userFitnessProfile) {
         this.userFitnessProfile = userFitnessProfile;
+    }
+
+    @Override
+    public String toString() {
+        return "UserFitnessMeasurement{" +
+                "userDevice=" + userDevice +
+                ", dateLogged=" + dateLogged +
+                ", measurementType=" + measurementType +
+                ", measurementValue=" + measurementValue +
+                ", measurementAccuracy=" + measurementAccuracy +
+                '}';
     }
 }
