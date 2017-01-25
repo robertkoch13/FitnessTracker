@@ -86,6 +86,11 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
+    public Device searchForDeviceByDeviceName(String deviceName) {
+        return deviceRepository.findDevicyByDeviceName(deviceName);
+    }
+
+    @Override
     public ArrayList<String> getDevices() {
         ArrayList<String> devices = new ArrayList<>();
         for(Device device : deviceRepository.findAll()) {

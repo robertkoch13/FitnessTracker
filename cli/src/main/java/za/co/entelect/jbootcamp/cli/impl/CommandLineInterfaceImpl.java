@@ -27,5 +27,8 @@ public class CommandLineInterfaceImpl implements CommandLineInterface {
 
         System.out.println(deviceService.getDevices());
 
+        Device device2 = deviceService.searchForDeviceByDeviceName("Superwow");
+        System.out.println(device2);
+
     }
 }

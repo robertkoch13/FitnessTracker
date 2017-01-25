@@ -12,5 +12,7 @@ public interface DeviceService {
     MeasurementFrequency addMeasurementFrequency(String frequency);
     UnitOfMeasurement addUnitOfMeasurement(String unitOfMeasurement);
 
+    Device searchForDeviceByDeviceName(String deviceName);
+
     ArrayList<String> getDevices();
 }
