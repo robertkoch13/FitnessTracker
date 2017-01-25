@@ -81,6 +81,8 @@
     <modules>
         <module>domain</module>
         <module>persistence</module>
+        <module>services</module>
+        <module>cli</module>
     </modules>
 
     <build>
