@@ -9,7 +9,7 @@ public class UserDevice implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_device_id")
-    private int userDeviceId;
+    private int id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "device_id", nullable = false)
@@ -30,20 +30,20 @@ public class UserDevice implements java.io.Serializable {
 
     public UserDevice() {}
 
-    public UserDevice(int userDeviceId, Device device, String name, String serialNumber, boolean isActive) {
-        this.userDeviceId = userDeviceId;
+    public UserDevice(int id, Device device, String name, String serialNumber, boolean isActive) {
+        this.id = id;
         this.device = device;
         this.name = name;
         this.serialNumber = serialNumber;
         this.isActive = isActive;
     }
 
-    public int getUserDeviceId() {
-        return userDeviceId;
+    public int getId() {
+        return id;
     }
 
-    public void setUserDeviceId(int userDeviceId) {
-        this.userDeviceId = userDeviceId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Device getDevice() {

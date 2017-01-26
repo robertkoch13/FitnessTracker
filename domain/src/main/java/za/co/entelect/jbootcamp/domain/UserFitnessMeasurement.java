@@ -10,7 +10,7 @@ public class UserFitnessMeasurement implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_fitness_measurement_id")
-    private int userFitnessMeasurementId;
+    private int id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_device_id", nullable = false)
@@ -34,8 +34,8 @@ public class UserFitnessMeasurement implements java.io.Serializable {
 
     public UserFitnessMeasurement() {}
 
-    public UserFitnessMeasurement(int userFitnessMeasurementId, UserDevice userDevice, Date dateLogged, MeasurementType measurementType, double measurementValue, double measurementAccuracy) {
-        this.userFitnessMeasurementId = userFitnessMeasurementId;
+    public UserFitnessMeasurement(int id, UserDevice userDevice, Date dateLogged, MeasurementType measurementType, double measurementValue, double measurementAccuracy) {
+        this.id = id;
         this.userDevice = userDevice;
         this.dateLogged = dateLogged;
         this.measurementType = measurementType;
@@ -43,12 +43,12 @@ public class UserFitnessMeasurement implements java.io.Serializable {
         this.measurementAccuracy = measurementAccuracy;
     }
 
-    public int getUserFitnessMeasurementId() {
-        return userFitnessMeasurementId;
+    public int getId() {
+        return id;
     }
 
-    public void setUserFitnessMeasurementId(int userFitnessMeasurementId) {
-        this.userFitnessMeasurementId = userFitnessMeasurementId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public UserDevice getUserDevice() {

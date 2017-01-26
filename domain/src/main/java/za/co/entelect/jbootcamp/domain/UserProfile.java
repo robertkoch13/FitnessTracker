@@ -6,12 +6,12 @@ import java.util.List;
 
 @Entity
 @Table(name="user")
-public class User implements java.io.Serializable {
+public class UserProfile implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_id")
-    private int userId;
+    private int id;
 
     private String username;
 
@@ -29,18 +29,18 @@ public class User implements java.io.Serializable {
             inverseJoinColumns=@JoinColumn(name="role_id"))
     private List<Role> roles = new ArrayList<>();
 
-    public User() {}
+    public UserProfile() {}
 
-    public User(int userId, String username, String password, String firstName, String lastName) {
-        this.userId = userId;
+    public UserProfile(int id, String username, String password, String firstName, String lastName) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public User(int userId, String username, String password, String firstName, String lastName, List<Role> roles) {
-        this.userId = userId;
+    public UserProfile(int id, String username, String password, String firstName, String lastName, List<Role> roles) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -48,12 +48,12 @@ public class User implements java.io.Serializable {
         this.roles = roles;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getId() {
+        return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -98,10 +98,11 @@ public class User implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserProfile{" +
                 "username='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
     }
+
 }

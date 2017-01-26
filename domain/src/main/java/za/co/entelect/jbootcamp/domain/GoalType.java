@@ -9,24 +9,24 @@ public class GoalType implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="goal_type_id")
-    private int goalTypeId;
+    private int id;
 
     @Column(name="goal_type")
     private String goalType;
 
     public GoalType() {}
 
-    public GoalType(int goalTypeId, String goalType) {
-        this.goalTypeId = goalTypeId;
+    public GoalType(int id, String goalType) {
+        this.id = id;
         this.goalType = goalType;
     }
 
-    public int getGoalTypeId() {
-        return goalTypeId;
+    public int getId() {
+        return id;
     }
 
-    public void setGoalTypeId(int goalTypeId) {
-        this.goalTypeId = goalTypeId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getGoalType() {

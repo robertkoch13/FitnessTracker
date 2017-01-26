@@ -9,23 +9,23 @@ public class MeasurementFrequency implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="measurement_frequency_id")
-    private int measurementFrequencyId;
+    private int id;
 
     private String frequency;
 
     public MeasurementFrequency() {}
 
-    public MeasurementFrequency(int measurementFrequencyId, String frequency) {
-        this.measurementFrequencyId = measurementFrequencyId;
+    public MeasurementFrequency(int id, String frequency) {
+        this.id = id;
         this.frequency = frequency;
     }
 
-    public int getMeasurementFrequencyId() {
-        return measurementFrequencyId;
+    public int getId() {
+        return id;
     }
 
-    public void setMeasurementFrequencyId(int measurementFrequencyId) {
-        this.measurementFrequencyId = measurementFrequencyId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFrequency() {

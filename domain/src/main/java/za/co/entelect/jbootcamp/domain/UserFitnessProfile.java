@@ -12,7 +12,7 @@ public class UserFitnessProfile implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_id")
-    private int userId;
+    private int id;
 
     private String gender;
 
@@ -37,35 +37,35 @@ public class UserFitnessProfile implements java.io.Serializable {
 
     @OneToOne(fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
-    private User user;
+    private UserProfile userProfile;
 
     public UserFitnessProfile() {}
 
-    public UserFitnessProfile(int userId, String gender, Date dateOfBirth, String systemOfMeasurementPreference, User user) {
-        this.userId = userId;
+    public UserFitnessProfile(int id, String gender, Date dateOfBirth, String systemOfMeasurementPreference, UserProfile userProfile) {
+        this.id = id;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.systemOfMeasurementPreference = systemOfMeasurementPreference;
-        this.user = user;
+        this.userProfile = userProfile;
     }
 
-    public UserFitnessProfile(int userId, String gender, Date dateOfBirth, String systemOfMeasurementPreference, List<UserDevice> userDevices, List<UserGoal> userGoals, List<UserFitnessMeasurement> userFitnessMeasurements, User user) {
-        this.userId = userId;
+    public UserFitnessProfile(int id, String gender, Date dateOfBirth, String systemOfMeasurementPreference, List<UserDevice> userDevices, List<UserGoal> userGoals, List<UserFitnessMeasurement> userFitnessMeasurements, UserProfile userProfile) {
+        this.id = id;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.systemOfMeasurementPreference = systemOfMeasurementPreference;
         this.userDevices = userDevices;
         this.userGoals = userGoals;
         this.userFitnessMeasurements = userFitnessMeasurements;
-        this.user = user;
+        this.userProfile = userProfile;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getId() {
+        return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getGender() {
@@ -116,12 +116,12 @@ public class UserFitnessProfile implements java.io.Serializable {
         this.userFitnessMeasurements = userFitnessMeasurements;
     }
 
-    public User getUser() {
-        return user;
+    public UserProfile getUserProfile() {
+        return userProfile;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
     }
 
     @Override

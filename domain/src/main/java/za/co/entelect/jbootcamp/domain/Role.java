@@ -11,7 +11,7 @@ public class Role implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="role_id")
-    private int roleId;
+    private int id;
 
     @Column(name="role_description")
     private String name;
@@ -24,23 +24,23 @@ public class Role implements java.io.Serializable {
 
     public Role() {}
 
-    public Role(int roleId, String name) {
-        this.roleId = roleId;
+    public Role(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 
-    public Role(int roleId, String name, List<Permission> permission) {
-        this.roleId = roleId;
+    public Role(int id, String name, List<Permission> permission) {
+        this.id = id;
         this.name = name;
         this.permission = permission;
     }
 
-    public int getRoleId() {
-        return roleId;
+    public int getId() {
+        return id;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

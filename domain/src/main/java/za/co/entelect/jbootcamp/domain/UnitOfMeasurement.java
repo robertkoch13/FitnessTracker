@@ -9,24 +9,24 @@ public class UnitOfMeasurement implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="unit_of_measurement_id")
-    private int unitOfMeasurementId;
+    private int id;
 
     @Column(name="unit_of_measurement")
     private String unitOfMeasurement;
 
     public UnitOfMeasurement() {}
 
-    public UnitOfMeasurement(int unitOfMeasurementId, String unitOfMeasurement) {
-        this.unitOfMeasurementId = unitOfMeasurementId;
+    public UnitOfMeasurement(int id, String unitOfMeasurement) {
+        this.id = id;
         this.unitOfMeasurement = unitOfMeasurement;
     }
 
-    public int getUnitOfMeasurementId() {
-        return unitOfMeasurementId;
+    public int getId() {
+        return id;
     }
 
-    public void setUnitOfMeasurementId(int unitOfMeasurementId) {
-        this.unitOfMeasurementId = unitOfMeasurementId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUnitOfMeasurement() {

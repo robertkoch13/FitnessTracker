@@ -9,7 +9,7 @@ public class MeasurementType implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="measurement_type_id")
-    private int measurementTypeId;
+    private int id;
 
     private String name;
 
@@ -26,20 +26,20 @@ public class MeasurementType implements java.io.Serializable {
 
     public MeasurementType() {}
 
-    public MeasurementType(int measurementTypeId, String name, UnitOfMeasurement unitOfMeasurement, double defaultAccuracy, MeasurementFrequency measurementFrequency) {
-        this.measurementTypeId = measurementTypeId;
+    public MeasurementType(int id, String name, UnitOfMeasurement unitOfMeasurement, double defaultAccuracy, MeasurementFrequency measurementFrequency) {
+        this.id = id;
         this.name = name;
         this.unitOfMeasurement = unitOfMeasurement;
         this.defaultAccuracy = defaultAccuracy;
         this.measurementFrequency = measurementFrequency;
     }
 
-    public int getMeasurementTypeId() {
-        return measurementTypeId;
+    public int getId() {
+        return id;
     }
 
-    public void setMeasurementTypeId(int measurementTypeId) {
-        this.measurementTypeId = measurementTypeId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

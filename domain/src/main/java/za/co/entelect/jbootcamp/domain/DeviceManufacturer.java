@@ -11,7 +11,7 @@ public class DeviceManufacturer implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="device_manufacturer_id")
-    private int deviceManufacturerId;
+    private int id;
 
     @Column(name="manufacturer")
     private String name;
@@ -21,17 +21,17 @@ public class DeviceManufacturer implements java.io.Serializable {
 
     public DeviceManufacturer() {}
 
-    public DeviceManufacturer(int deviceManufacturerId, String name) {
-        this.deviceManufacturerId = deviceManufacturerId;
+    public DeviceManufacturer(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 
-    public int getDeviceManufacturerId() {
-        return deviceManufacturerId;
+    public int getId() {
+        return id;
     }
 
-    public void setDeviceManufacturerId(int deviceManufacturerId) {
-        this.deviceManufacturerId = deviceManufacturerId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

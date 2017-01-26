@@ -29,15 +29,23 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-framework-bom</artifactId>
-                <version>4.2.6.RELEASE</version>
+                <version>4.3.5.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
 
             <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-bom</artifactId>
+                <version>4.2.1.RELEASE</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-releasetrain</artifactId>
-                <version>Hopper-SR1</version>
+                <version>Hopper-SR6</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -53,6 +61,12 @@
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-entitymanager</artifactId>
                 <version>5.1.0.Final</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>5.3.4.Final</version>
             </dependency>
 
             <dependency>
@@ -75,6 +89,7 @@
                 <version>2.0.54-beta</version>
                 <scope>test</scope>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 

@@ -10,7 +10,7 @@ public class UserGoal implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_goal_id")
-    private int userGoalId;
+    private int id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "goal_type_id", nullable = false)
@@ -40,8 +40,8 @@ public class UserGoal implements java.io.Serializable {
 
     public UserGoal() {}
 
-    public UserGoal(int userGoalId, GoalType goalType, boolean isEnabled, Date dateLogged, Date goalDate, double goalValue, MeasurementType measurementType) {
-        this.userGoalId = userGoalId;
+    public UserGoal(int id, GoalType goalType, boolean isEnabled, Date dateLogged, Date goalDate, double goalValue, MeasurementType measurementType) {
+        this.id = id;
         this.goalType = goalType;
         this.isEnabled = isEnabled;
         this.dateLogged = dateLogged;
@@ -50,8 +50,8 @@ public class UserGoal implements java.io.Serializable {
         this.measurementType = measurementType;
     }
 
-    public UserGoal(int userGoalId, GoalType goalType, boolean isEnabled, Date dateLogged, Date dateCompleted, Date goalDate, double goalValue, MeasurementType measurementType) {
-        this.userGoalId = userGoalId;
+    public UserGoal(int id, GoalType goalType, boolean isEnabled, Date dateLogged, Date dateCompleted, Date goalDate, double goalValue, MeasurementType measurementType) {
+        this.id = id;
         this.goalType = goalType;
         this.isEnabled = isEnabled;
         this.dateLogged = dateLogged;
@@ -61,12 +61,12 @@ public class UserGoal implements java.io.Serializable {
         this.measurementType = measurementType;
     }
 
-    public int getUserGoalId() {
-        return userGoalId;
+    public int getId() {
+        return id;
     }
 
-    public void setUserGoalId(int userGoalId) {
-        this.userGoalId = userGoalId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public GoalType getGoalType() {

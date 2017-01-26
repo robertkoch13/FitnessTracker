@@ -9,23 +9,23 @@ public class Permission implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="permission_id")
-    private int permissionId;
+    private int id;
 
     private String permission;
 
     public Permission() {}
 
-    public Permission(int permissionId, String permission) {
-        this.permissionId = permissionId;
+    public Permission(int id, String permission) {
+        this.id = id;
         this.permission = permission;
     }
 
-    public int getPermissionId() {
-        return permissionId;
+    public int getId() {
+        return id;
     }
 
-    public void setPermissionId(int permissionId) {
-        this.permissionId = permissionId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPermission() {
