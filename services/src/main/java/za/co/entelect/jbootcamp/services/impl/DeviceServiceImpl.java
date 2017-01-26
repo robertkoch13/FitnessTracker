@@ -87,7 +87,7 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public Device searchForDeviceByDeviceName(String deviceName) {
-        return deviceRepository.findDevicyByDeviceName(deviceName);
+        return deviceRepository.findDeviceByDeviceName(deviceName);
     }
 
     @Override
