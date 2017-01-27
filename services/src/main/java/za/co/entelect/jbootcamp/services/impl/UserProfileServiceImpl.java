@@ -2,6 +2,7 @@ package za.co.entelect.jbootcamp.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,7 @@ import za.co.entelect.jbootcamp.persistence.RoleRepository;
 import za.co.entelect.jbootcamp.persistence.UserProfileRepository;
 import za.co.entelect.jbootcamp.services.UserProfileService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -45,12 +47,12 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     @Override
     public List<UserProfile> findUserProfileByProperty(String property, String searchCriteria) {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
     public Page<UserProfile> findUserProfileByProperty(String property, String searchCriteria, Pageable pageable) {
-        return null;
+        return new PageImpl<>(new ArrayList<>());
     }
 
     @Override
@@ -92,12 +94,12 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     @Override
     public List<Role> findRoleByProperty(String property, String searchCriteria) {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
     public Page<Role> findRoleByProperty(String property, String searchCriteria, Pageable pageable) {
-        return null;
+        return new PageImpl<>(new ArrayList<>());
     }
 
     @Override
@@ -134,12 +136,12 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     @Override
     public List<Permission> findPermissionByProperty(String property, String searchCriteria) {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
     public Page<Permission> findPermissionByProperty(String property, String searchCriteria, Pageable pageable) {
-        return null;
+        return new PageImpl<>(new ArrayList<>());
     }
 
     @Override

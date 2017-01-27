@@ -18,6 +18,12 @@ public class CommandLineInterfaceImpl implements CommandLineInterface {
 
     @Override
     public void execute() {
+/*        DeviceType deviceType = new DeviceType();
+        deviceType
+        Device device = new Device();
+        device.
+
+
         DeviceType deviceType = deviceService.addDeviceType("Wrist");
         DeviceManufacturer deviceManufacturer = deviceService.addDeviceManufacturer("Google");
         MeasurementFrequency measurementFrequency = deviceService.addMeasurementFrequency("Daily");
@@ -29,6 +35,7 @@ public class CommandLineInterfaceImpl implements CommandLineInterface {
 
         Device device2 = deviceService.searchForDeviceByDeviceName("Superwow");
         System.out.println(device2);
+*/
 
     }
 }

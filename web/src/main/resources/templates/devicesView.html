@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Devices</title>
+    </head>
+    <body>
+        <table border="1" style="width:300px">
+            <tr>
+                <td>Device Name</td>
+                <td>Device Manufacturer</td>
+                <td>Device Type</td>
+            </tr>
+            <th:block th:each="device : ${devices}">
+                <tr>
+                    <td th:text="${device.deviceName}"></td>
+                    <td th:text="${device.deviceManufacturer.name}"></td>
+                    <td th:text="${device.deviceType.name}"></td>
+                </tr>
+            </th:block>
+        </table>
+    </body>
+</html>

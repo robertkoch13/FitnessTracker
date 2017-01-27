@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import za.co.entelect.jbootcamp.domain.Device;
 import za.co.entelect.jbootcamp.services.DeviceService;
 
+import java.util.List;
+
 @Controller
 public class DeviceController {
     private DeviceService deviceService;
@@ -17,10 +19,10 @@ public class DeviceController {
         this.deviceService = deviceService;
     }
 
-    @RequestMapping("/device/show")
-    public String show(@RequestParam("name") String name, Model model) {
-        Device device = deviceService.searchForDeviceByDeviceName(name);
-        model.addAttribute("device", device);
-        return "deviceView";
+    @RequestMapping("/devices/findbyproperty")
+    public String show(@RequestParam("property") String property, @RequestParam("value") String value, Model model) {
+        List<Device> devices = deviceService.findDeviceByProperty(property, value);
+        model.addAttribute("devices", devices);
+        return "devicesView";
     }
 }

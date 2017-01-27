@@ -5,7 +5,6 @@ import org.springframework.data.domain.Pageable;
 import za.co.entelect.jbootcamp.domain.Permission;
 import za.co.entelect.jbootcamp.domain.Role;
 import za.co.entelect.jbootcamp.domain.UserProfile;
-
 import java.util.List;
 
 public interface UserProfileService {
