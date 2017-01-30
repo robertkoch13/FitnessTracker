@@ -4,19 +4,20 @@
     <title>Login</title>
 </head>
 <body>
-<form action="#" th:action="@{/login}" th:object="${loginUser}" method="post">
-    <fieldset>
-<div>
-    <label for="username">username</label>
-    <input type="text" th:field="*{username}" />
-</div>
-<div>
-    <label for="password">password</label>
-    <input type="password" th:field="*{password}" />
-</div>
-        <div class="submit">
-            <button type="submit" name="save">Login</button>
-        </div>
-    </fieldset></form>
+    <form action="#" th:action="@{/login}" th:object="${loginUser}" method="post">
+        <fieldset>
+            <div>
+                <label for="username">username</label>
+                <input id="username" type="text" th:field="*{username}" />
+            </div>
+            <div>
+                <label for="password">password</label>
+                <input id="password" type="password" th:field="*{password}" />
+            </div>
+            <div class="submit">
+                <button type="submit" name="save">Login</button>
+            </div>
+        </fieldset>
+    </form>
 </body>
 </html>
