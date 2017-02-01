@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="default"  th:with="page='home'">
 <head>
-    <title>Entelect Training: Dashboard</title>
+    <title>Home</title>
+    <link rel="stylesheet" href="/resources/css/core.css"/>
 </head>
-
 <body>
-<h1>Entelect Training: Home</h1>
-
-<p>Hello, dashboard</p>
+<div layout:fragment="content">
+    Welcome!
+</div>
 </body>
+<th:block layout:fragment="scripts">
+
+</th:block>
 </html>

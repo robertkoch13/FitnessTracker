@@ -1,14 +1,75 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <title>Entelect Training: Home</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Create Login</title>
+
+    <!-- Bootstrap -->
+    <link href="/resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 </head>
-
 <body>
-<h1>Entelect Training: Create Login</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <img src="/resources/images/fitnesstracker.jpg" alt="..." class="img-thumbnail">
+            <form name="f" th:action="@{/createlogin}" th:object="${loginUser}" method="post">
+                <fieldset>
+                    <div class="row">
+                        <label for="username">First name</label>
+                        <input type="text" id="firstName" th:field="*{firstName}" />
+                    </div>
+                    <div class="row">
+                        <label for="username">Last Name</label>
+                        <input type="text" id="lastName" th:field="*{lastName}" />
+                    </div>
+                    <div class="row">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" th:field="*{username}" />
+                    </div>
+                    <div class="row">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" th:field="*{password}" />
+                    </div>
+                    <div class="row">
+                        <div class="form-actions">
+                            <button type="submit" class="btn">Create Login</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <table class="table">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                </tr>
+                <th:block th:each="userProfile : ${userProfileList}">
+                    <tr>
+                        <td th:text="${userProfile.firstName}"></td>
+                        <td th:text="${userProfile.lastName}"></td>
+                        <td th:text="${userProfile.username}"></td>
+                    </tr>
+                </th:block>
+            </table>
+        </div>
+    </div>
+</div>
 
-<p>Creating login</p>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 </body>
 </html>
+

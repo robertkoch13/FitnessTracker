@@ -10,6 +10,7 @@ import java.util.List;
 public interface UserProfileService {
     UserProfile findUserProfileById(int id);
     List<UserProfile> findUserProfileAll();
+    UserProfile findUserProfileByUsername(String username);
     Page<UserProfile> findUserProfileAll(Pageable pageable);
     List<UserProfile> findUserProfileByProperty(String property, String searchCriteria);
     Page<UserProfile> findUserProfileByProperty(String property, String searchCriteria, Pageable pageable);

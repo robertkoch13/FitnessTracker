@@ -26,8 +26,7 @@ public class MeasurementType implements java.io.Serializable {
 
     public MeasurementType() {}
 
-    public MeasurementType(int id, String name, UnitOfMeasurement unitOfMeasurement, double defaultAccuracy, MeasurementFrequency measurementFrequency) {
-        this.id = id;
+    public MeasurementType(String name, UnitOfMeasurement unitOfMeasurement, double defaultAccuracy, MeasurementFrequency measurementFrequency) {
         this.name = name;
         this.unitOfMeasurement = unitOfMeasurement;
         this.defaultAccuracy = defaultAccuracy;

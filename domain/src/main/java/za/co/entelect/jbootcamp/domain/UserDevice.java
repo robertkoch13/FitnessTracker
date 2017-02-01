@@ -30,8 +30,7 @@ public class UserDevice implements java.io.Serializable {
 
     public UserDevice() {}
 
-    public UserDevice(int id, Device device, String name, String serialNumber, boolean isActive) {
-        this.id = id;
+    public UserDevice(Device device, String name, String serialNumber, boolean isActive) {
         this.device = device;
         this.name = name;
         this.serialNumber = serialNumber;

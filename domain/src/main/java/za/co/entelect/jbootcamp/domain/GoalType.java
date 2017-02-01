@@ -16,8 +16,7 @@ public class GoalType implements java.io.Serializable {
 
     public GoalType() {}
 
-    public GoalType(int id, String goalType) {
-        this.id = id;
+    public GoalType(String goalType) {
         this.goalType = goalType;
     }
 

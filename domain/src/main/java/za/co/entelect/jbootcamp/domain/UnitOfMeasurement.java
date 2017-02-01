@@ -16,8 +16,7 @@ public class UnitOfMeasurement implements java.io.Serializable {
 
     public UnitOfMeasurement() {}
 
-    public UnitOfMeasurement(int id, String unitOfMeasurement) {
-        this.id = id;
+    public UnitOfMeasurement(String unitOfMeasurement) {
         this.unitOfMeasurement = unitOfMeasurement;
     }
 

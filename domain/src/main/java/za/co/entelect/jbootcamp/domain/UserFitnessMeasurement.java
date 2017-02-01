@@ -16,6 +16,8 @@ public class UserFitnessMeasurement implements java.io.Serializable {
     @JoinColumn(name = "user_device_id", nullable = false)
     private UserDevice userDevice;
 
+    @Temporal(TemporalType.DATE)
+    @Column(name="date_time_logged")
     private Date dateLogged;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -34,8 +36,7 @@ public class UserFitnessMeasurement implements java.io.Serializable {
 
     public UserFitnessMeasurement() {}
 
-    public UserFitnessMeasurement(int id, UserDevice userDevice, Date dateLogged, MeasurementType measurementType, double measurementValue, double measurementAccuracy) {
-        this.id = id;
+    public UserFitnessMeasurement(UserDevice userDevice, Date dateLogged, MeasurementType measurementType, double measurementValue, double measurementAccuracy) {
         this.userDevice = userDevice;
         this.dateLogged = dateLogged;
         this.measurementType = measurementType;

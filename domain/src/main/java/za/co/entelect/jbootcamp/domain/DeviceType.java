@@ -21,8 +21,7 @@ public class DeviceType implements java.io.Serializable {
 
     public DeviceType() {}
 
-    public DeviceType(int id, String name) {
-        this.id = id;
+    public DeviceType(String name) {
         this.name = name;
     }
 

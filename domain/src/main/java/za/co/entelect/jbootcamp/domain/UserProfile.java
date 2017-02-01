@@ -31,8 +31,7 @@ public class UserProfile implements java.io.Serializable {
 
     public UserProfile() {}
 
-    public UserProfile(int id, String username, String password, String firstName, String lastName) {
-        this.id = id;
+    public UserProfile(String username, String password, String firstName, String lastName) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;

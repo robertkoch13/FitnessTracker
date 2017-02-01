@@ -51,7 +51,7 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public List<Device> findDeviceByProperty(String property, String searchCriteria) {
-        if(property.toUpperCase().equals("DEVICENAME")) {
+        if(property.toUpperCase().equals("DEVICE NAME")) {
             return deviceRepository.findDeviceByDeviceNameContaining(searchCriteria);
         } else
             return new ArrayList<>();

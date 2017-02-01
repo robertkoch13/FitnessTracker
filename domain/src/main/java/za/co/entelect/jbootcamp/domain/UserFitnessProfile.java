@@ -41,8 +41,7 @@ public class UserFitnessProfile implements java.io.Serializable {
 
     public UserFitnessProfile() {}
 
-    public UserFitnessProfile(int id, String gender, Date dateOfBirth, String systemOfMeasurementPreference, UserProfile userProfile) {
-        this.id = id;
+    public UserFitnessProfile(String gender, Date dateOfBirth, String systemOfMeasurementPreference, UserProfile userProfile) {
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.systemOfMeasurementPreference = systemOfMeasurementPreference;

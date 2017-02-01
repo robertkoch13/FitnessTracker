@@ -41,6 +41,11 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
+    public UserProfile findUserProfileByUsername(String username) {
+        return userProfileRepository.findUserProfileByUsername(username);
+    }
+
+    @Override
     public Page<UserProfile> findUserProfileAll(Pageable pageable) {
         return userProfileRepository.findAll(pageable);
     }

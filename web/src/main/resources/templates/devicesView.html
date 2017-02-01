@@ -1,22 +1,33 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Devices</title>
-    </head>
-    <body>
-        <table border="1" style="width:300px">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="default" th:with="page='devices'">
+<head>
+    <title>Devices</title>
+    <link rel="stylesheet" href="/resources/css/core.css"/>
+</head>
+<body>
+<div layout:fragment="content">
+    <table class="table">
+        <tr>
+            <th>id</th>
+            <th>Device Name</th>
+            <th>Device Manufacturer</th>
+            <th>Device Type</th>
+        </tr>
+        <th:block th:each="device : ${devices}">
             <tr>
-                <td>Device Name</td>
-                <td>Device Manufacturer</td>
-                <td>Device Type</td>
+                <td th:text="${device.id}"></td>
+                <td th:text="${device.deviceName}"></td>
+                <td th:text="${device.deviceManufacturer.name}"></td>
+                <td th:text="${device.deviceType.name}"></td>
             </tr>
-            <th:block th:each="device : ${devices}">
-                <tr>
-                    <td th:text="${device.deviceName}"></td>
-                    <td th:text="${device.deviceManufacturer.name}"></td>
-                    <td th:text="${device.deviceType.name}"></td>
-                </tr>
-            </th:block>
-        </table>
-    </body>
+        </th:block>
+    </table>
+</div>
+</body>
+<th:block layout:fragment="scripts">
+
+</th:block>
 </html>

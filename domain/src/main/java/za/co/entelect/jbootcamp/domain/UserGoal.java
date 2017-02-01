@@ -40,8 +40,7 @@ public class UserGoal implements java.io.Serializable {
 
     public UserGoal() {}
 
-    public UserGoal(int id, GoalType goalType, boolean isEnabled, Date dateLogged, Date goalDate, double goalValue, MeasurementType measurementType) {
-        this.id = id;
+    public UserGoal(GoalType goalType, boolean isEnabled, Date dateLogged, Date goalDate, double goalValue, MeasurementType measurementType) {
         this.goalType = goalType;
         this.isEnabled = isEnabled;
         this.dateLogged = dateLogged;

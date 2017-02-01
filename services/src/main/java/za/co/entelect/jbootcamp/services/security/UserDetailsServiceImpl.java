@@ -1,5 +1,6 @@
 package za.co.entelect.jbootcamp.services.security;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
 import za.co.entelect.jbootcamp.domain.Permission;
 import za.co.entelect.jbootcamp.domain.Role;
 import za.co.entelect.jbootcamp.domain.UserProfile;
@@ -15,8 +16,8 @@ import javax.naming.NamingException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service("userDetailsService")
-public class UserDetailsServiceImpl {
+@Service("customUserDetailsService")
+public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserProfileRepository userProfileRepository;
 
@@ -33,7 +34,7 @@ public class UserDetailsServiceImpl {
         return null;
     }
 
-    public UserDetails buildSpringUserFromAppUser(UserProfile userProfile) throws NamingException {
+    private UserDetails buildSpringUserFromAppUser(UserProfile userProfile) throws NamingException {
         String username = userProfile.getUsername();
         String password = userProfile.getPassword();
 
@@ -50,8 +51,6 @@ public class UserDetailsServiceImpl {
             authorities.add(new SimpleGrantedAuthority(permission));
         }
 
-        UserDetails currentUser = new User(username, password, authorities);
-
-        return currentUser;
+        return new User(username, password, authorities);
     }
 }

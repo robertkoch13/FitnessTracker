@@ -15,8 +15,7 @@ public class MeasurementFrequency implements java.io.Serializable {
 
     public MeasurementFrequency() {}
 
-    public MeasurementFrequency(int id, String frequency) {
-        this.id = id;
+    public MeasurementFrequency(String frequency) {
         this.frequency = frequency;
     }
 

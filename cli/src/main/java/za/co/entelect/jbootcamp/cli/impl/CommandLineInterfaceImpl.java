@@ -5,19 +5,37 @@ import org.springframework.stereotype.Component;
 import za.co.entelect.jbootcamp.cli.CommandLineInterface;
 import za.co.entelect.jbootcamp.domain.*;
 import za.co.entelect.jbootcamp.services.DeviceService;
+import za.co.entelect.jbootcamp.services.UserProfileService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class CommandLineInterfaceImpl implements CommandLineInterface {
 
     private DeviceService deviceService;
+    private UserProfileService userProfileService;
 
     @Autowired
-    public CommandLineInterfaceImpl(DeviceService deviceService) {
+    public CommandLineInterfaceImpl(DeviceService deviceService, UserProfileService userProfileService) {
         this.deviceService = deviceService;
+        this.userProfileService = userProfileService;
     }
 
     @Override
     public void execute() {
+/*
+        List<Permission> permissions = new ArrayList<>();
+        permissions.add(userProfileService.createPermission(new Permission("Standard")));
+        Role role = userProfileService.createRole(new Role("Standard", permissions));
+*/
+
+        UserProfile userProfile = userProfileService.findUserProfileByUsername("robert.koch@entelect.co.za");
+        List<Role> roles = new ArrayList<>();
+        roles.add(userProfileService.findRoleByName("Standard"));
+        userProfile.setRoles(roles);
+        userProfileService.updateUserProfile(userProfile);
+
 /*        DeviceType deviceType = new DeviceType();
         deviceType
         Device device = new Device();

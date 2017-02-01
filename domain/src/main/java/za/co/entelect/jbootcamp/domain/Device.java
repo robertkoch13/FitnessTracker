@@ -34,8 +34,7 @@ public class Device implements java.io.Serializable {
 
     public Device() {}
 
-    public Device(int id, String deviceName, DeviceManufacturer deviceManufacturer, DeviceType deviceType, List<MeasurementType> measurementTypes, String model) {
-        this.id = id;
+    public Device(String deviceName, DeviceManufacturer deviceManufacturer, DeviceType deviceType, List<MeasurementType> measurementTypes, String model) {
         this.deviceName = deviceName;
         this.deviceManufacturer = deviceManufacturer;
         this.deviceType = deviceType;

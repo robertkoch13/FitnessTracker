@@ -15,8 +15,7 @@ public class Permission implements java.io.Serializable {
 
     public Permission() {}
 
-    public Permission(int id, String permission) {
-        this.id = id;
+    public Permission(String permission) {
         this.permission = permission;
     }
 

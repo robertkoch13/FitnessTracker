@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Login</title>
+    <title>Dashboard</title>
 
     <!-- Bootstrap -->
     <link href="/resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
@@ -16,36 +16,20 @@
 
 </head>
 <body>
+<div th:replace="/header :: header"></div>
 <div class="container">
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <img src="/resources/images/fitnesstracker.jpg" alt="..." class="img-thumbnail">
-            <form name="f" th:action="@{/login}" method="post">
-                <fieldset>
-                    <legend>Please Login</legend>
-                    <div th:if="${param.error}" class="alert alert-error">
-                        Invalid username and password.
-                    </div>
-                    <div th:if="${param.logout}" class="alert alert-success">
-                        You have been logged out.
-                    </div>
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username"/>
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password"/>
-                    <div class="form-actions">
-                        <button type="submit" class="btn">Log in</button>
-                    </div>
-                </fieldset>
-            </form>
-            <a href="/createlogin">New here?  Sign up!</a>
+        <div class="col-md-3"></div>
+        <div class="col-md-6" layout:fragment="content">
+            Page content goes here
         </div>
+        <div class="col-md-3"></div>
     </div>
 </div>
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+<th:block layout:fragment="scripts"></th:block>
 </body>
 </html>
 

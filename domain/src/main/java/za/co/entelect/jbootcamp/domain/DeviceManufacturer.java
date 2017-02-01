@@ -21,8 +21,7 @@ public class DeviceManufacturer implements java.io.Serializable {
 
     public DeviceManufacturer() {}
 
-    public DeviceManufacturer(int id, String name) {
-        this.id = id;
+    public DeviceManufacturer(String name) {
         this.name = name;
     }
 
