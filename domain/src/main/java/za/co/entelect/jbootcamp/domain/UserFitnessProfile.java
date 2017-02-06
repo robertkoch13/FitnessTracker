@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name="user_fitness_profile")
-public class UserFitnessProfile implements java.io.Serializable, GenericDomainModelInterface {
+public class UserFitnessProfile implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

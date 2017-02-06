@@ -21,17 +21,18 @@ import java.util.Map;
 @Controller
 public class DeviceController {
 
-    @Autowired
     private DeviceService deviceService;
-
-    @Autowired
     private DeviceManufacturerService deviceManufacturerService;
-
-    @Autowired
     private DeviceTypeService deviceTypeService;
+    private PagingBuilder pagingBuilder;
 
     @Autowired
-    private PagingBuilder pagingBuilder;
+    public DeviceController(DeviceService deviceService, DeviceManufacturerService deviceManufacturerService, DeviceTypeService deviceTypeService, PagingBuilder pagingBuilder) {
+        this.deviceService = deviceService;
+        this.deviceManufacturerService = deviceManufacturerService;
+        this.deviceTypeService = deviceTypeService;
+        this.pagingBuilder = pagingBuilder;
+    }
 
     @ModelAttribute("allDeviceTypes")
     public List<DeviceType> populateDeviceTypes() {

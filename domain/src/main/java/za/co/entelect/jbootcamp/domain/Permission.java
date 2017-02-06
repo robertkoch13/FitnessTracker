@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="permission")
-public class Permission implements java.io.Serializable, GenericDomainModelInterface {
+public class Permission implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

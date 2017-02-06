@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name="device_manufacturer")
-public class DeviceManufacturer implements java.io.Serializable, GenericDomainModelInterface {
+public class DeviceManufacturer implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

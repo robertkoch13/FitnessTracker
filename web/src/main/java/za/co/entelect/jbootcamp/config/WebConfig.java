@@ -45,10 +45,10 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
     @Override
     public void addFormatters(final FormatterRegistry registry) {
         super.addFormatters(registry);
-        registry.addFormatter(new DeviceFormatter());
-        registry.addFormatter(new DeviceTypeFormatter());
-        registry.addFormatter(new DeviceManufacturerFormatter());
-        registry.addFormatter(new UserProfileFormatter());
+        registry.addFormatter(deviceFormatter());
+        registry.addFormatter(deviceTypeFormatter());
+        registry.addFormatter(deviceManufacturerFormatter());
+        registry.addFormatter(userProfileFormatter());
     }
 
     @Override
@@ -60,6 +60,26 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
         resolver.setOneIndexedParameters(true);
         argumentResolvers.add(resolver);
         super.addArgumentResolvers(argumentResolvers);
+    }
+
+    @Bean
+    public DeviceFormatter deviceFormatter() {
+        return new DeviceFormatter();
+    }
+
+    @Bean
+    public DeviceTypeFormatter deviceTypeFormatter() {
+        return new DeviceTypeFormatter();
+    }
+
+    @Bean
+    public DeviceManufacturerFormatter deviceManufacturerFormatter() {
+        return new DeviceManufacturerFormatter();
+    }
+
+    @Bean
+    public  UserProfileFormatter userProfileFormatter() {
+        return new UserProfileFormatter();
     }
 
     @Bean

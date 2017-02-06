@@ -16,11 +16,14 @@ import java.util.Map;
 @Controller
 public class UserController {
 
-    @Autowired
     private UserProfileService userProfileService;
+    private PagingBuilder pagingBuilder;
 
     @Autowired
-    private PagingBuilder pagingBuilder;
+    public UserController(UserProfileService userProfileService, PagingBuilder pagingBuilder) {
+        this.userProfileService = userProfileService;
+        this.pagingBuilder = pagingBuilder;
+    }
 
     @RequestMapping({ "/users/{property}/{value}", "/users" })
     public ModelAndView showUsers(@PathVariable Map<String, String> pathVariables, Pageable pageable) {

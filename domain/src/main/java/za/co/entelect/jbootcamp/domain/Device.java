@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name="device")
-public class Device implements java.io.Serializable, GenericDomainModelInterface {
+public class Device implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

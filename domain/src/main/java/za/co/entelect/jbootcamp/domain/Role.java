@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name="role")
-public class Role implements java.io.Serializable, GenericDomainModelInterface {
+public class Role implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

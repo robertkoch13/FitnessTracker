@@ -20,11 +20,14 @@ import javax.validation.Valid;
 @Controller
 public class LoginController {
 
-    @Autowired
     private UserProfileService userProfileService;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    public LoginController(UserProfileService userProfileService, PasswordEncoder passwordEncoder) {
+        this.userProfileService = userProfileService;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() {

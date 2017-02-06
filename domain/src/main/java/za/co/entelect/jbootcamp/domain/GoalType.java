@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="goal_type")
-public class GoalType implements java.io.Serializable, GenericDomainModelInterface {
+public class GoalType implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

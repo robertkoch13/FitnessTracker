@@ -10,8 +10,12 @@ import za.co.entelect.jbootcamp.services.UserProfileService;
 @Controller
 public class UserProfileController {
 
-    @Autowired
     UserProfileService userProfileService;
+
+    @Autowired
+    public UserProfileController(UserProfileService userProfileService) {
+        this.userProfileService = userProfileService;
+    }
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public ModelAndView root() {
