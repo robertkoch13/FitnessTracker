@@ -1,5 +1,8 @@
 package za.co.entelect.jbootcamp.domain;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,8 +54,26 @@ public class DeviceType implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "DeviceType{" +
-                "name='" + name + '\'' +
-                '}';
+        return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DeviceType that = (DeviceType) o;
+
+        return new EqualsBuilder()
+                .append(name, that.name)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(name)
+                .toHashCode();
     }
 }

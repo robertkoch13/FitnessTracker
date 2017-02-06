@@ -14,6 +14,7 @@ public interface DeviceService {
     long countDevice();
     Device createDevice(Device object);
     Device updateDevice(Device object);
+    List<String> getDeviceSearchProperties();
 
     DeviceType findDeviceTypeById(int id);
     List<DeviceType> findDeviceTypeAll();

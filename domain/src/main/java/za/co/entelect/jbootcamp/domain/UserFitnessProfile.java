@@ -1,5 +1,8 @@
 package za.co.entelect.jbootcamp.domain;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,16 +26,16 @@ public class UserFitnessProfile implements java.io.Serializable {
     @Column(name="system_of_measurement_preference")
     private String systemOfMeasurementPreference;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userFitnessProfile")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userFitnessProfile", cascade = {CascadeType.ALL})
     private List<UserDevice> userDevices = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JoinTable(name="device_measurement_types",
             joinColumns=@JoinColumn(name="device_id"),
             inverseJoinColumns=@JoinColumn(name="measurement_type_id"))
     private List<UserGoal> userGoals = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userFitnessProfile")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userFitnessProfile", cascade = {CascadeType.ALL})
     private List<UserFitnessMeasurement> userFitnessMeasurements = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -130,5 +133,31 @@ public class UserFitnessProfile implements java.io.Serializable {
                 ", dateOfBirth=" + dateOfBirth +
                 ", systemOfMeasurementPreference='" + systemOfMeasurementPreference + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserFitnessProfile that = (UserFitnessProfile) o;
+
+        return new EqualsBuilder()
+                .append(gender, that.gender)
+                .append(dateOfBirth, that.dateOfBirth)
+                .append(systemOfMeasurementPreference, that.systemOfMeasurementPreference)
+                .append(userProfile, that.userProfile)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(gender)
+                .append(dateOfBirth)
+                .append(systemOfMeasurementPreference)
+                .append(userProfile)
+                .toHashCode();
     }
 }

@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import za.co.entelect.jbootcamp.domain.Role;
 
 public interface RoleRepository extends JpaRepository<Role, Integer> {
-    Role findRoleByName(String name);
+    Role findByName(String name);
 }

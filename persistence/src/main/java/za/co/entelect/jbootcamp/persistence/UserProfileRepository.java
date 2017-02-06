@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import za.co.entelect.jbootcamp.domain.UserProfile;
 
 public interface UserProfileRepository extends JpaRepository<UserProfile, Integer> {
-    UserProfile findUserProfileByUsername(String username);
+    UserProfile findByUsername(String username);
 }

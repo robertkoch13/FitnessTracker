@@ -7,16 +7,21 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.core.Ordered;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
+import org.springframework.format.FormatterRegistry;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
+import za.co.entelect.jbootcamp.conversion.DeviceFormatter;
+import za.co.entelect.jbootcamp.conversion.DeviceManufacturerFormatter;
+import za.co.entelect.jbootcamp.conversion.DeviceTypeFormatter;
+import za.co.entelect.jbootcamp.utils.Paging;
 
 @EnableWebMvc
 @Configuration
@@ -36,6 +41,32 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
         registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/resources/");
+    }
+
+    @Override
+    public void addFormatters(final FormatterRegistry registry) {
+        super.addFormatters(registry);
+        registry.addFormatter(deviceTypeFormatter());
+        registry.addFormatter(deviceManufacturerFormatter());
+        registry.addFormatter(deviceFormatter());
+    }
+
+    @Bean
+    public Paging pagingConstructor() {return new Paging();}
+
+    @Bean
+    public DeviceFormatter deviceFormatter() {
+        return new DeviceFormatter();
+    }
+
+    @Bean
+    public DeviceTypeFormatter deviceTypeFormatter() {
+        return new DeviceTypeFormatter();
+    }
+
+    @Bean
+    public DeviceManufacturerFormatter deviceManufacturerFormatter() {
+        return new DeviceManufacturerFormatter();
     }
 
     @Bean

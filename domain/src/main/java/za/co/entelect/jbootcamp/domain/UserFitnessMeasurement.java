@@ -1,5 +1,8 @@
 package za.co.entelect.jbootcamp.domain;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -109,5 +112,33 @@ public class UserFitnessMeasurement implements java.io.Serializable {
                 ", measurementValue=" + measurementValue +
                 ", measurementAccuracy=" + measurementAccuracy +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserFitnessMeasurement that = (UserFitnessMeasurement) o;
+
+        return new EqualsBuilder()
+                .append(measurementValue, that.measurementValue)
+                .append(measurementAccuracy, that.measurementAccuracy)
+                .append(userDevice, that.userDevice)
+                .append(dateLogged, that.dateLogged)
+                .append(measurementType, that.measurementType)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(userDevice)
+                .append(dateLogged)
+                .append(measurementType)
+                .append(measurementValue)
+                .append(measurementAccuracy)
+                .toHashCode();
     }
 }

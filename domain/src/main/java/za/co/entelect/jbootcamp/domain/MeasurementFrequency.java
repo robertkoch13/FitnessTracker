@@ -1,5 +1,8 @@
 package za.co.entelect.jbootcamp.domain;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 
 @Entity
@@ -37,8 +40,26 @@ public class MeasurementFrequency implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "MeasurementFrequency{" +
-                "frequency='" + frequency + '\'' +
-                '}';
+        return frequency;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MeasurementFrequency that = (MeasurementFrequency) o;
+
+        return new EqualsBuilder()
+                .append(frequency, that.frequency)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(frequency)
+                .toHashCode();
     }
 }

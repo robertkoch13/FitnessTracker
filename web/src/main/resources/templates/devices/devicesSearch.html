@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="devices/devices" th:with="page='devices'">
+<head>
+    <title>Devices</title>
+    <link rel="stylesheet" href="/resources/css/core.css"/>
+</head>
+<body>
+<div layout:fragment="devicecontent">
+<form action="#" th:action="@{/devices/search}" th:object="${searchObject}" method="post">
+    <div class="input-group input-group-lg">
+        <div class="row">
+            <select class="form-control" th:field="*{property}">
+                <option th:each="searchProperty : ${searchObject.allSearchProperties}"
+                        th:value="${searchProperty}"
+                        th:text="${searchProperty}">Wireframe</option>
+            </select>
+        </div>
+        <div class="row">
+            <input type="text" class="form-control" th:field="*{value}" placeholder="Search for..." aria-label="...">
+            <div class="btn-group">
+                <button type="submit" class="btn btn-large btn-default">Search</button>
+            </div>
+        </div>
+    </div><!-- /input-group -->
+</form>
+</div>
+</body>
+<th:block layout:fragment="scripts">
+
+</th:block>
+</html>

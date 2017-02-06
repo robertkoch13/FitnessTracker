@@ -1,5 +1,8 @@
 package za.co.entelect.jbootcamp.domain;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 
 @Entity
@@ -38,8 +41,26 @@ public class GoalType implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "GoalType{" +
-                "goalType='" + goalType + '\'' +
-                '}';
+        return goalType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        GoalType goalType1 = (GoalType) o;
+
+        return new EqualsBuilder()
+                .append(goalType, goalType1.goalType)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(goalType)
+                .toHashCode();
     }
 }

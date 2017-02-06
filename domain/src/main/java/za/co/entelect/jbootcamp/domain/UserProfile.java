@@ -1,5 +1,8 @@
 package za.co.entelect.jbootcamp.domain;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +41,7 @@ public class UserProfile implements java.io.Serializable {
         this.lastName = lastName;
     }
 
-    public UserProfile(int id, String username, String password, String firstName, String lastName, List<Role> roles) {
-        this.id = id;
+    public UserProfile(String username, String password, String firstName, String lastName, List<Role> roles) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -104,4 +106,23 @@ public class UserProfile implements java.io.Serializable {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserProfile that = (UserProfile) o;
+
+        return new EqualsBuilder()
+                .append(username, that.username)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(username)
+                .toHashCode();
+    }
 }

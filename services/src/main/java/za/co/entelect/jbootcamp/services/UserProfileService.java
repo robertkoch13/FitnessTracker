@@ -17,7 +17,11 @@ public interface UserProfileService {
     long countUserProfile();
     UserProfile createUserProfile(UserProfile object);
     UserProfile updateUserProfile(UserProfile object);
+    UserProfile createUserProfile(String username, String password, String firstname, String lastname);
+    UserProfile addRoleToUserProfile(UserProfile userProfile, String role);
+    UserProfile addRoleToUserProfile(String username, String role);
 
+    Role addPermissionToRole(String roleName, String permissionName);
     Role findRoleById(int id);
     Role findRoleByName(String name);
     List<Role> findRoleAll();

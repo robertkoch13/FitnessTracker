@@ -24,7 +24,7 @@ public class Device implements java.io.Serializable {
     @JoinColumn(name = "device_type_id", nullable = false)
     private DeviceType deviceType;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JoinTable(name="device_measurement_types",
             joinColumns=@JoinColumn(name="device_id"),
             inverseJoinColumns=@JoinColumn(name="measurement_type_id"))
@@ -92,11 +92,32 @@ public class Device implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "Device{" +
-                "deviceName='" + deviceName + '\'' +
-                ", deviceManufacturer=" + deviceManufacturer +
-                ", deviceType=" + deviceType +
-                ", model='" + model + '\'' +
-                '}';
+        return String.format("%s %s %s %s", deviceManufacturer, deviceName, model, deviceType);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Device device = (Device) o;
+
+        return new org.apache.commons.lang3.builder.EqualsBuilder()
+                .append(deviceName, device.deviceName)
+                .append(deviceManufacturer, device.deviceManufacturer)
+                .append(deviceType, device.deviceType)
+                .append(model, device.model)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new org.apache.commons.lang3.builder.HashCodeBuilder(17, 37)
+                .append(deviceName)
+                .append(deviceManufacturer)
+                .append(deviceType)
+                .append(model)
+                .toHashCode();
     }
 }

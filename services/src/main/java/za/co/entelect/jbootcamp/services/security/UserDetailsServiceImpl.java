@@ -23,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserProfile userProfile = userProfileRepository.findUserProfileByUsername(username);
+        UserProfile userProfile = userProfileRepository.findByUsername(username);
         if( userProfile != null) {
             try {
                 return buildSpringUserFromAppUser(userProfile);

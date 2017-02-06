@@ -1,5 +1,8 @@
 package za.co.entelect.jbootcamp.domain;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -131,5 +134,37 @@ public class UserGoal implements java.io.Serializable {
                 ", goalDate=" + goalDate +
                 ", goalValue=" + goalValue +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserGoal userGoal = (UserGoal) o;
+
+        return new EqualsBuilder()
+                .append(isEnabled, userGoal.isEnabled)
+                .append(goalValue, userGoal.goalValue)
+                .append(goalType, userGoal.goalType)
+                .append(dateLogged, userGoal.dateLogged)
+                .append(dateCompleted, userGoal.dateCompleted)
+                .append(goalDate, userGoal.goalDate)
+                .append(measurementType, userGoal.measurementType)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(goalType)
+                .append(isEnabled)
+                .append(dateLogged)
+                .append(dateCompleted)
+                .append(goalDate)
+                .append(goalValue)
+                .append(measurementType)
+                .toHashCode();
     }
 }

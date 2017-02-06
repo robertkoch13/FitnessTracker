@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="devices/devices" th:with="page='devicetypes'">
+<head>
+    <title>Device Types</title>
+    <link rel="stylesheet" href="/resources/css/core.css"/>
+</head>
+<body>
+<div layout:fragment="devicecontent">
+    <div class="row">
+        <table class="table">
+            <tr>
+                <th>Name</th>
+            </tr>
+            <th:block th:each="deviceType : ${allDeviceTypes}">
+                <tr>
+                    <td><a th:href="@{/admin/devicetype/edit(id=${deviceType.id})}" th:text="${deviceType.name}"></a></td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+    <div class="row">
+        <div th:replace="main/pageBar :: paginationbar"></div>
+    </div>
+    <div class="row">
+        <div class="btn-group" role="group" aria-label="...">
+            <a href="/admin/devicetype/add" class="btn btn-large btn-default" role="button">Add a Type</a>
+        </div>
+    </div>
+</div>
+</body>
+<th:block layout:fragment="devicescripts">
+
+</th:block>
+</html>

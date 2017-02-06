@@ -1,5 +1,8 @@
 package za.co.entelect.jbootcamp.domain;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 
 @Entity
@@ -38,8 +41,26 @@ public class UnitOfMeasurement implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "UnitOfMeasurement{" +
-                "unitOfMeasurement='" + unitOfMeasurement + '\'' +
-                '}';
+        return unitOfMeasurement;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UnitOfMeasurement that = (UnitOfMeasurement) o;
+
+        return new EqualsBuilder()
+                .append(unitOfMeasurement, that.unitOfMeasurement)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(unitOfMeasurement)
+                .toHashCode();
     }
 }

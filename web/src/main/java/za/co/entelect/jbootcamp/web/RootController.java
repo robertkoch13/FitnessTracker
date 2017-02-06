@@ -8,6 +8,6 @@ public class RootController {
 
     @RequestMapping("")
     public String getSiteRoot() {
-        return "dashboard";
+        return "dashboard/dashboard";
     }
 }

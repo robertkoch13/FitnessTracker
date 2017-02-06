@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+ <div th:fragment="deviceViewSingle">
+    <div class="row">
+        <label class="label label-default" for="devicetype">Device Type</label>
+        <select class="form-control" id="devicetype" th:field="*{deviceType}">
+            <option th:each="type : ${allDeviceTypes}"
+                    th:value="${type.id}"
+                    th:text="${type.name}">Wireframe</option>
+        </select>
+    </div>
+    <div class="row">
+        <label class="label label-default" for="devicemanufacturer">Device Manufacturer</label>
+        <select class="form-control" id="devicemanufacturer" th:field="*{deviceManufacturer}">
+            <option th:each="manufacturer : ${allDeviceManufacturers}"
+                    th:value="${manufacturer.id}"
+                    th:text="${manufacturer.name}">Wireframe</option>
+        </select>
+    </div>
+    <div class="row">
+        <label class="label label-default" for="name">Device Name</label>
+        <input type="text" class="form-control" id="name" th:field="*{deviceName}" placeholder="Device name" aria-label="...">
+    </div>
+    <div class="row">
+        <label class="label label-default" for="model">Device Model</label>
+        <input type="text" class="form-control" id="model" th:field="*{model}" placeholder="Device model" aria-label="...">
+    </div>
+        <input type="text" class="hidden" id="id" th:field="*{id}" placeholder="Device model" aria-label="...">
+</div>
+
+</html>

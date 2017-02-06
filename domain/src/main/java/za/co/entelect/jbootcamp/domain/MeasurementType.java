@@ -1,5 +1,8 @@
 package za.co.entelect.jbootcamp.domain;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 
 @Entity
@@ -81,5 +84,31 @@ public class MeasurementType implements java.io.Serializable {
                 ", defaultAccuracy=" + defaultAccuracy +
                 ", measurementFrequency=" + measurementFrequency +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MeasurementType that = (MeasurementType) o;
+
+        return new EqualsBuilder()
+                .append(defaultAccuracy, that.defaultAccuracy)
+                .append(name, that.name)
+                .append(unitOfMeasurement, that.unitOfMeasurement)
+                .append(measurementFrequency, that.measurementFrequency)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(name)
+                .append(unitOfMeasurement)
+                .append(defaultAccuracy)
+                .append(measurementFrequency)
+                .toHashCode();
     }
 }

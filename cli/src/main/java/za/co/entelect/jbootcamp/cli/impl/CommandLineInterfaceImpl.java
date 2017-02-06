@@ -24,17 +24,27 @@ public class CommandLineInterfaceImpl implements CommandLineInterface {
 
     @Override
     public void execute() {
+
 /*
         List<Permission> permissions = new ArrayList<>();
-        permissions.add(userProfileService.createPermission(new Permission("Standard")));
-        Role role = userProfileService.createRole(new Role("Standard", permissions));
+        permissions.add(userProfileService.createPermission(new Permission("Manage Device Manufacturers")));
+        permissions.add(userProfileService.createPermission(new Permission("Manage Device Types")));
+        permissions.add(userProfileService.createPermission(new Permission("Manage Devices")));
+        Role role = userProfileService.createRole(new Role("Admin", permissions));
+
 */
 
+        userProfileService.addPermissionToRole("Admin", "Admin");
+
+
+/*
         UserProfile userProfile = userProfileService.findUserProfileByUsername("robert.koch@entelect.co.za");
         List<Role> roles = new ArrayList<>();
         roles.add(userProfileService.findRoleByName("Standard"));
+        roles.add(userProfileService.findRoleByName("Admin"));
         userProfile.setRoles(roles);
         userProfileService.updateUserProfile(userProfile);
+*/
 
 /*        DeviceType deviceType = new DeviceType();
         deviceType

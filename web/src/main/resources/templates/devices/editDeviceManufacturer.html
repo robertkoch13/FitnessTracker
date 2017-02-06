@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="devices/devices" th:with="page='devicemanufacturers'">
+<head>
+    <title>Edit Device Manufacturer</title>
+    <link rel="stylesheet" href="/resources/css/core.css"/>
+</head>
+<body>
+<div layout:fragment="devicecontent">
+    <form action="#" th:action="@{/admin/devicemanufacturer/edit}" th:object="${deviceManufacturer}" method="post">
+        <div class="input-group input-group-lg">
+            <div th:replace="devices/deviceManufacturerViewSingle :: deviceManufacturerViewSingle"></div>
+            <div class="row">
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-large btn-default">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+<th:block layout:fragment="scripts">
+
+</th:block>
+</html>

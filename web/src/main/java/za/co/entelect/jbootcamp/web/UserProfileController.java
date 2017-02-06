@@ -15,7 +15,7 @@ public class UserProfileController {
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public ModelAndView root() {
-        return new ModelAndView("dashboard");
+        return new ModelAndView("dashboard/dashboard");
     }
 
 }

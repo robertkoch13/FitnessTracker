@@ -42,7 +42,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     @Override
     public UserProfile findUserProfileByUsername(String username) {
-        return userProfileRepository.findUserProfileByUsername(username);
+        return userProfileRepository.findByUsername(username);
     }
 
     @Override
@@ -78,13 +78,43 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
+    @Transactional
+    public UserProfile createUserProfile(String username, String password, String firstname, String lastname) {
+        List<Role> roles = new ArrayList<>();
+        roles.add(findRoleByName("Standard"));
+        return createUserProfile(new UserProfile(username, password, firstname, lastname, roles));
+    }
+
+    @Override
+    @Transactional
+    public UserProfile addRoleToUserProfile(UserProfile userProfile, String role) {
+        userProfile.getRoles().add(findRoleByName(role));
+        return updateUserProfile(userProfile);
+    }
+
+    @Override
+    @Transactional
+    public UserProfile addRoleToUserProfile(String username, String role) {
+        return addRoleToUserProfile(findUserProfileByUsername(username), role);
+    }
+
+    @Override
+    @Transactional
+    public Role addPermissionToRole(String roleName, String permissionName) {
+        Role role = roleRepository.findByName(roleName);
+        role.getPermission().add(new Permission(permissionName));
+        roleRepository.save(role);
+        return role;
+    }
+
+    @Override
     public Role findRoleById(int id) {
         return roleRepository.findOne(id);
     }
 
     @Override
     public Role findRoleByName(String name) {
-        return roleRepository.findRoleByName(name);
+        return roleRepository.findByName(name);
     }
 
     @Override

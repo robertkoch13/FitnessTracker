@@ -38,15 +38,9 @@ public class LoginController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
-    public String accessDeniedPage(ModelMap model) {
-        model.addAttribute("user", getPrincipal());
-        return "accessDenied";
-    }
-
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() {
-        return "login";
+        return "login/login";
     }
 
     @RequestMapping(value="/logout", method = RequestMethod.GET)
@@ -64,7 +58,7 @@ public class LoginController {
         LoginUser loginUser = new LoginUser();
         model.addAttribute("userProfileList", userProfileList);
         model.addAttribute("loginUser", loginUser);
-        return "createlogin";
+        return "login/createlogin";
     }
 
     @PostMapping("/createlogin")
@@ -72,21 +66,11 @@ public class LoginController {
             @ModelAttribute("loginUser") @Valid LoginUser loginUser,
             BindingResult bindingResult) {
 
-        UserProfile userProfile = new UserProfile();
-        userProfile.setUsername(loginUser.getUsername());
-
-        userProfile.setPassword(passwordEncoder.encode(loginUser.getPassword()));
-
-        userProfile.setFirstName(loginUser.getFirstName());
-        userProfile.setLastName(loginUser.getLastName());
-
-        userProfile = userProfileService.createUserProfile(userProfile);
-
-        List<Role> roles = new ArrayList<>();
-        roles.add(userProfileService.findRoleByName("Standard"));
-        userProfile.setRoles(roles);
-
-        userProfileService.createUserProfile(userProfile);
+        userProfileService.createUserProfile(
+                loginUser.getFirstName(),
+                loginUser.getLastName(),
+                loginUser.getUsername(),
+                passwordEncoder.encode(loginUser.getPassword()));
 
         return "redirect:/login";
     }

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+ <div th:fragment="deviceTypeViewSingle">
+    <div class="row">
+        <label class="label label-default" for="name">Type Name</label>
+        <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="name" aria-label="...">
+    </div>
+        <input type="text" class="hidden" id="id" th:field="*{id}" placeholder="id" aria-label="...">
+</div>
+
+</html>

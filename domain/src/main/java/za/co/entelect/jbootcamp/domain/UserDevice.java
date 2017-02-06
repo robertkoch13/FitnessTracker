@@ -1,5 +1,8 @@
 package za.co.entelect.jbootcamp.domain;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 
 @Entity
@@ -87,10 +90,34 @@ public class UserDevice implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "UserDevice{" +
-                "device=" + device +
-                ", name='" + name + '\'' +
-                ", serialNumber='" + serialNumber + '\'' +
-                '}';
+        return String.format("%s (%s %s", name, device, serialNumber);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserDevice that = (UserDevice) o;
+
+        return new EqualsBuilder()
+                .append(isActive, that.isActive)
+                .append(device, that.device)
+                .append(name, that.name)
+                .append(serialNumber, that.serialNumber)
+                .append(userFitnessProfile, that.userFitnessProfile)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(device)
+                .append(name)
+                .append(serialNumber)
+                .append(isActive)
+                .append(userFitnessProfile)
+                .toHashCode();
     }
 }
