@@ -7,7 +7,6 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -18,10 +17,10 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
-import za.co.entelect.jbootcamp.conversion.DeviceFormatter;
-import za.co.entelect.jbootcamp.conversion.DeviceManufacturerFormatter;
-import za.co.entelect.jbootcamp.conversion.DeviceTypeFormatter;
-import za.co.entelect.jbootcamp.utils.Paging;
+import za.co.entelect.jbootcamp.conversion.*;
+import za.co.entelect.jbootcamp.utils.PagingBuilder;
+
+import java.util.List;
 
 @EnableWebMvc
 @Configuration
@@ -46,28 +45,25 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
     @Override
     public void addFormatters(final FormatterRegistry registry) {
         super.addFormatters(registry);
-        registry.addFormatter(deviceTypeFormatter());
-        registry.addFormatter(deviceManufacturerFormatter());
-        registry.addFormatter(deviceFormatter());
+        registry.addFormatter(new DeviceFormatter());
+        registry.addFormatter(new DeviceTypeFormatter());
+        registry.addFormatter(new DeviceManufacturerFormatter());
+        registry.addFormatter(new UserProfileFormatter());
+    }
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        PageableHandlerMethodArgumentResolver resolver = new PageableHandlerMethodArgumentResolver();
+        resolver.setPageParameterName("page");
+        resolver.setSizeParameterName("pageSize");
+        resolver.setFallbackPageable(pagingBuilder().getPageable());
+        resolver.setOneIndexedParameters(true);
+        argumentResolvers.add(resolver);
+        super.addArgumentResolvers(argumentResolvers);
     }
 
     @Bean
-    public Paging pagingConstructor() {return new Paging();}
-
-    @Bean
-    public DeviceFormatter deviceFormatter() {
-        return new DeviceFormatter();
-    }
-
-    @Bean
-    public DeviceTypeFormatter deviceTypeFormatter() {
-        return new DeviceTypeFormatter();
-    }
-
-    @Bean
-    public DeviceManufacturerFormatter deviceManufacturerFormatter() {
-        return new DeviceManufacturerFormatter();
-    }
+    public PagingBuilder pagingBuilder() {return new PagingBuilder();}
 
     @Bean
     public SpringResourceTemplateResolver templateResolver() {

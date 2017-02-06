@@ -2,19 +2,19 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="main/layout282" th:with="page='devicetypes'">
+      layout:decorator="main/layout282" th:with="page='users'">
 <head>
-    <title>Add Device Type</title>
+    <title>Edit User</title>
     <link rel="stylesheet" href="/resources/css/core.css"/>
 </head>
 <body>
 <div layout:fragment="layout282">
-    <form action="#" th:action="@{/admin/devicetype/add}" th:object="${deviceType}" method="post">
+    <form action="#" th:action="@{/admin/user/edit}" th:object="${user}" method="post">
         <div class="input-group input-group-lg">
-            <div th:replace="devices/deviceTypeViewSingle :: deviceTypeViewSingle"></div>
+            <div th:replace="users/userViewSingle :: userViewSingle"></div>
             <div class="row">
                 <div class="btn-group">
-                    <button type="submit" class="btn btn-large btn-default">Add</button>
+                    <button type="submit" class="btn btn-large btn-default">Save</button>
                 </div>
             </div>
         </div>

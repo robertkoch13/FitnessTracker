@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="user_goal")
-public class UserGoal implements java.io.Serializable {
+public class UserGoal implements java.io.Serializable, GenericDomainModelInterface {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

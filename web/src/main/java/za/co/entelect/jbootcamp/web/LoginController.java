@@ -1,42 +1,30 @@
 package za.co.entelect.jbootcamp.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.BasePasswordEncoder;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import za.co.entelect.jbootcamp.domain.Role;
-import za.co.entelect.jbootcamp.domain.UserProfile;
 import za.co.entelect.jbootcamp.models.LoginUser;
 import za.co.entelect.jbootcamp.services.UserProfileService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class LoginController {
 
+    @Autowired
     private UserProfileService userProfileService;
-    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public LoginController(UserProfileService userProfileService, PasswordEncoder passwordEncoder) {
-        this.userProfileService = userProfileService;
-        this.passwordEncoder = passwordEncoder;
-    }
+    private PasswordEncoder passwordEncoder;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() {
@@ -54,9 +42,7 @@ public class LoginController {
 
     @GetMapping("/createlogin")
     public String createLogin(Model model) {
-        List<UserProfile> userProfileList = userProfileService.findUserProfileAll();
         LoginUser loginUser = new LoginUser();
-        model.addAttribute("userProfileList", userProfileList);
         model.addAttribute("loginUser", loginUser);
         return "login/createlogin";
     }

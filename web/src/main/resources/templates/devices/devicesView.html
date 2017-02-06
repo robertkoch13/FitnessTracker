@@ -2,13 +2,13 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="devices/devices" th:with="page='devices'">
+      layout:decorator="main/layout282" th:with="page='devices'">
 <head>
     <title>Devices</title>
     <link rel="stylesheet" href="/resources/css/core.css"/>
 </head>
 <body>
-<div layout:fragment="devicecontent">
+<div layout:fragment="layout282">
     <div class="row">
         <table class="table">
             <tr>
@@ -19,7 +19,7 @@
             </tr>
             <th:block th:each="device : ${collection}">
                 <tr>
-                    <td><a th:href="@{/admin/devices/edit(id=${device.id})}" th:text="${device.deviceName}"></a></td>
+                    <td><a th:href="@{/admin/device/edit(id=${device.id})}" th:text="${device.deviceName}"></a></td>
                     <td th:text="${device.deviceManufacturer.name}"></td>
                     <td th:text="${device.deviceType.name}"></td>
                     <td th:text="${device.model}"></td>
@@ -32,7 +32,7 @@
     </div>
     <div class="row">
         <div class="btn-group" role="group" aria-label="...">
-            <a href="/admin/devices/add" class="btn btn-large btn-default" role="button">Add a Device</a>
+            <a href="/admin/device/add" class="btn btn-large btn-default" role="button">Add a Device</a>
             <a href="/devices/search" class="btn btn-large btn-default" role="button">Search for Device</a>
             <a href="/devices" class="btn btn-large btn-default" role="button">View all</a>
         </div>

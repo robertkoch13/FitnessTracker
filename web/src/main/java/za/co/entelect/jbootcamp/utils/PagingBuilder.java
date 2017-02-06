@@ -1,9 +1,11 @@
 package za.co.entelect.jbootcamp.utils;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.servlet.ModelAndView;
 
-public class Paging {
+public class PagingBuilder {
     private static final int BUTTONS_TO_SHOW = 5;
     private static final int INITIAL_PAGE = 0;
     private static final int INITIAL_PAGE_SIZE = 5;
@@ -22,13 +24,21 @@ public class Paging {
         return (page == null || page < 1) ? INITIAL_PAGE : page - 1;
     }
 
-    public <T> ModelAndView getModelAndView(String viewName, Page<T> collection, Integer pageSize) {
+    public Pageable getPageable(Integer page, Integer size) {
+        return new PageRequest(initialPage(page), initialPageSize(size));
+    }
+
+    public Pageable getPageable() {
+        return getPageable(null, null);
+    }
+
+    public <T> ModelAndView getModelAndView(String viewName, Page<T> collection, Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView(viewName);
 
         Pager pager = new Pager(collection.getTotalPages(), collection.getNumber(), BUTTONS_TO_SHOW);
 
         modelAndView.addObject("collection", collection);
-        modelAndView.addObject("selectedPageSize", pageSize);
+        modelAndView.addObject("selectedPageSize", pageable.getPageSize());
         modelAndView.addObject("pageSizes", PAGE_SIZES);
         modelAndView.addObject("pager", pager);
         return modelAndView;

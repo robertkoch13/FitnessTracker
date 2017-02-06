@@ -1,30 +1,16 @@
 package za.co.entelect.jbootcamp.conversion;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.Formatter;
+import org.springframework.stereotype.Component;
 import za.co.entelect.jbootcamp.domain.DeviceType;
-import za.co.entelect.jbootcamp.services.DeviceService;
+import za.co.entelect.jbootcamp.services.DeviceTypeService;
 
-import java.text.ParseException;
-import java.util.Locale;
-
-public class DeviceTypeFormatter implements Formatter<DeviceType> {
+@Component
+public class DeviceTypeFormatter extends GenericDomainFormatter<DeviceType, DeviceTypeService> {
 
     @Autowired
-    private DeviceService deviceService;
-
-    public DeviceTypeFormatter() {
+    public DeviceTypeFormatter(DeviceTypeService service) {
         super();
+        this.service = service;
     }
-
-    public DeviceType parse(final String text, final Locale locale) throws ParseException {
-        final Integer deviceTypeId = Integer.valueOf(text);
-        return this.deviceService.findDeviceTypeById(deviceTypeId);
-    }
-
-
-    public String print(final DeviceType object, final Locale locale) {
-        return (object != null ? Integer.toString(object.getId()) : "");
-    }
-
 }

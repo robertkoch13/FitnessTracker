@@ -2,14 +2,14 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="devices/devices" th:with="page='devices'">
+      layout:decorator="main/layout282" th:with="page='devices'">
 <head>
     <title>Edit Device</title>
     <link rel="stylesheet" href="/resources/css/core.css"/>
 </head>
 <body>
-<div layout:fragment="devicecontent">
-    <form action="#" th:action="@{/admin/devices/edit}" th:object="${device}" method="post">
+<div layout:fragment="layout282">
+    <form action="#" th:action="@{/admin/device/edit}" th:object="${device}" method="post">
         <div class="input-group input-group-lg">
             <div th:replace="devices/deviceViewSingle :: deviceViewSingle"></div>
             <div class="row">

@@ -2,13 +2,13 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="devices/devices" th:with="page='devices'">
+      layout:decorator="main/layout282" th:with="page='devices'">
 <head>
     <title>Devices</title>
     <link rel="stylesheet" href="/resources/css/core.css"/>
 </head>
 <body>
-<div layout:fragment="devicecontent">
+<div layout:fragment="layout282">
 <form action="#" th:action="@{/devices/search}" th:object="${searchObject}" method="post">
     <div class="input-group input-group-lg">
         <div class="row">

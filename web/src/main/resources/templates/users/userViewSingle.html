@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+ <div th:fragment="userViewSingle">
+    <div class="row">
+        <label class="label label-default" for="username">Username</label>
+        <input type="text" class="form-control" id="username" th:field="*{username}" placeholder="username" aria-label="...">
+    </div>
+    <div class="row">
+        <label class="label label-default" for="firstName">First Name</label>
+        <input type="text" class="form-control" id="firstName" th:field="*{firstName}" placeholder="First Name" aria-label="...">
+    </div>
+    <div class="row">
+        <label class="label label-default" for="lastName">Last Name</label>
+        <input type="text" class="form-control" id="lastName" th:field="*{lastName}" placeholder="Last Name" aria-label="...">
+    </div>
+        <input type="text" class="hidden" id="id" th:field="*{id}" placeholder="id" aria-label="...">
+</div>
+
+</html>

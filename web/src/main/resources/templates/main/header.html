@@ -27,6 +27,12 @@
                         <li th:classappend="${page == 'devicemanufacturers' ? 'active' : ''}"><a href="#" th:href="@{/devices/manufacturers}">Manufacturers</a></li>
                     </ul>
                 </li>
+                <li class="dropdown" th:classappend="${page == 'users' ? 'active' : ''}">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li th:classappend="${page == 'users' ? 'active' : ''}"><a href="#" th:href="@{/users}">Users</a></li>
+                    </ul>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/logout" th:href="@{/logout}">Logout</a></li>

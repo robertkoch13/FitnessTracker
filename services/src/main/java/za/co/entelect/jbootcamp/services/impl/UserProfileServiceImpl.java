@@ -12,187 +12,47 @@ import za.co.entelect.jbootcamp.domain.UserProfile;
 import za.co.entelect.jbootcamp.persistence.PermissionRepository;
 import za.co.entelect.jbootcamp.persistence.RoleRepository;
 import za.co.entelect.jbootcamp.persistence.UserProfileRepository;
+import za.co.entelect.jbootcamp.services.RoleService;
 import za.co.entelect.jbootcamp.services.UserProfileService;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserProfileServiceImpl implements UserProfileService {
-    private UserProfileRepository userProfileRepository;
-    private RoleRepository roleRepository;
-    private PermissionRepository permissionRepository;
+public class UserProfileServiceImpl extends GenericServiceImpl<UserProfile, UserProfileRepository> implements UserProfileService {
 
     @Autowired
-    public UserProfileServiceImpl(UserProfileRepository userProfileRepository, RoleRepository roleRepository, PermissionRepository permissionRepository) {
-        this.userProfileRepository = userProfileRepository;
-        this.roleRepository = roleRepository;
-        this.permissionRepository = permissionRepository;
+    private RoleService roleService;
+
+    @Override
+    public UserProfile findByUsername(String username) {
+        return repository.findByUsername(username);
     }
 
     @Override
-    public UserProfile findUserProfileById(int id) {
-        return userProfileRepository.findOne(id);
-    }
-
-    @Override
-    public List<UserProfile> findUserProfileAll() {
-        return userProfileRepository.findAll();
-    }
-
-    @Override
-    public UserProfile findUserProfileByUsername(String username) {
-        return userProfileRepository.findByUsername(username);
-    }
-
-    @Override
-    public Page<UserProfile> findUserProfileAll(Pageable pageable) {
-        return userProfileRepository.findAll(pageable);
-    }
-
-    @Override
-    public List<UserProfile> findUserProfileByProperty(String property, String searchCriteria) {
-        return new ArrayList<>();
-    }
-
-    @Override
-    public Page<UserProfile> findUserProfileByProperty(String property, String searchCriteria, Pageable pageable) {
+    public Page<UserProfile> findByProperty(String property, String searchCriteria, Pageable pageable) {
         return new PageImpl<>(new ArrayList<>());
-    }
-
-    @Override
-    public long countUserProfile() {
-        return userProfileRepository.count();
-    }
-
-    @Override
-    @Transactional
-    public UserProfile createUserProfile(UserProfile object) {
-        return userProfileRepository.save(object);
-    }
-
-    @Override
-    @Transactional
-    public UserProfile updateUserProfile(UserProfile object) {
-        return userProfileRepository.save(object);
     }
 
     @Override
     @Transactional
     public UserProfile createUserProfile(String username, String password, String firstname, String lastname) {
         List<Role> roles = new ArrayList<>();
-        roles.add(findRoleByName("Standard"));
-        return createUserProfile(new UserProfile(username, password, firstname, lastname, roles));
+        roles.add(roleService.findByName("Standard"));
+        return create(new UserProfile(username, password, firstname, lastname, roles));
     }
 
     @Override
     @Transactional
     public UserProfile addRoleToUserProfile(UserProfile userProfile, String role) {
-        userProfile.getRoles().add(findRoleByName(role));
-        return updateUserProfile(userProfile);
+        userProfile.getRoles().add(roleService.findByName(role));
+        return update(userProfile);
     }
 
     @Override
     @Transactional
     public UserProfile addRoleToUserProfile(String username, String role) {
-        return addRoleToUserProfile(findUserProfileByUsername(username), role);
+        return addRoleToUserProfile(findByUsername(username), role);
     }
 
-    @Override
-    @Transactional
-    public Role addPermissionToRole(String roleName, String permissionName) {
-        Role role = roleRepository.findByName(roleName);
-        role.getPermission().add(new Permission(permissionName));
-        roleRepository.save(role);
-        return role;
-    }
-
-    @Override
-    public Role findRoleById(int id) {
-        return roleRepository.findOne(id);
-    }
-
-    @Override
-    public Role findRoleByName(String name) {
-        return roleRepository.findByName(name);
-    }
-
-    @Override
-    public List<Role> findRoleAll() {
-        return roleRepository.findAll();
-    }
-
-    @Override
-    public Page<Role> findRoleAll(Pageable pageable) {
-        return roleRepository.findAll(pageable);
-    }
-
-    @Override
-    public List<Role> findRoleByProperty(String property, String searchCriteria) {
-        return new ArrayList<>();
-    }
-
-    @Override
-    public Page<Role> findRoleByProperty(String property, String searchCriteria, Pageable pageable) {
-        return new PageImpl<>(new ArrayList<>());
-    }
-
-    @Override
-    public long countRole() {
-        return roleRepository.count();
-    }
-
-    @Override
-    @Transactional
-    public Role createRole(Role object) {
-        return roleRepository.save(object);
-    }
-
-    @Override
-    @Transactional
-    public Role updateRole(Role object) {
-        return roleRepository.save(object);
-    }
-
-    @Override
-    public Permission findPermissionById(int id) {
-        return permissionRepository.findOne(id);
-    }
-
-    @Override
-    public List<Permission> findPermissionAll() {
-        return permissionRepository.findAll();
-    }
-
-    @Override
-    public Page<Permission> findPermissionAll(Pageable pageable) {
-        return permissionRepository.findAll(pageable);
-    }
-
-    @Override
-    public List<Permission> findPermissionByProperty(String property, String searchCriteria) {
-        return new ArrayList<>();
-    }
-
-    @Override
-    public Page<Permission> findPermissionByProperty(String property, String searchCriteria, Pageable pageable) {
-        return new PageImpl<>(new ArrayList<>());
-    }
-
-    @Override
-    public long countPermission() {
-        return permissionRepository.count();
-    }
-
-    @Override
-    @Transactional
-    public Permission createPermission(Permission object) {
-        return permissionRepository.save(object);
-    }
-
-    @Override
-    @Transactional
-    public Permission updatePermission(Permission object) {
-        return permissionRepository.save(object);
-    }
 }

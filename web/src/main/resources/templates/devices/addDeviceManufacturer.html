@@ -2,13 +2,13 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="devices/devices" th:with="page='devicemanufacturers'">
+      layout:decorator="main/layout282" th:with="page='devicemanufacturers'">
 <head>
     <title>Add Device Manufacturer</title>
     <link rel="stylesheet" href="/resources/css/core.css"/>
 </head>
 <body>
-<div layout:fragment="devicecontent">
+<div layout:fragment="layout282">
     <form action="#" th:action="@{/admin/devicemanufacturer/add}" th:object="${deviceManufacturer}" method="post">
         <div class="input-group input-group-lg">
             <div th:replace="devices/deviceManufacturerViewSingle :: deviceManufacturerViewSingle"></div>

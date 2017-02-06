@@ -3,12 +3,8 @@ package za.co.entelect.jbootcamp.cli.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.co.entelect.jbootcamp.cli.CommandLineInterface;
-import za.co.entelect.jbootcamp.domain.*;
 import za.co.entelect.jbootcamp.services.DeviceService;
 import za.co.entelect.jbootcamp.services.UserProfileService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class CommandLineInterfaceImpl implements CommandLineInterface {
@@ -34,7 +30,7 @@ public class CommandLineInterfaceImpl implements CommandLineInterface {
 
 */
 
-        userProfileService.addPermissionToRole("Admin", "Admin");
+     //   userProfileService.add("Admin", "Admin");
 
 
 /*
@@ -53,7 +49,7 @@ public class CommandLineInterfaceImpl implements CommandLineInterface {
 
 
         DeviceType deviceType = deviceService.addDeviceType("Wrist");
-        DeviceManufacturer deviceManufacturer = deviceService.addDeviceManufacturer("Google");
+        DeviceManufacturerService deviceManufacturer = deviceService.addDeviceManufacturer("Google");
         MeasurementFrequency measurementFrequency = deviceService.addMeasurementFrequency("Daily");
         UnitOfMeasurement unitOfMeasurement = deviceService.addUnitOfMeasurement("Beats per minute");
         MeasurementType measurementType = deviceService.addMeasurementType("Heart Rate", 0, measurementFrequency, unitOfMeasurement);

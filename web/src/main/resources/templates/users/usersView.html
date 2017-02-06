@@ -2,9 +2,9 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="main/layout282" th:with="page='devicetypes'">
+      layout:decorator="main/layout282" th:with="page='users'">
 <head>
-    <title>Device Types</title>
+    <title>Devices</title>
     <link rel="stylesheet" href="/resources/css/core.css"/>
 </head>
 <body>
@@ -12,11 +12,15 @@
     <div class="row">
         <table class="table">
             <tr>
-                <th>Name</th>
+                <th>Username</th>
+                <th>First name</th>
+                <th>Last name</th>
             </tr>
-            <th:block th:each="deviceType : ${allDeviceTypes}">
+            <th:block th:each="user : ${collection}">
                 <tr>
-                    <td><a th:href="@{/admin/devicetype/edit(id=${deviceType.id})}" th:text="${deviceType.name}"></a></td>
+                    <td><a th:href="@{/admin/user/edit(id=${user.id})}" th:text="${user.username}"></a></td>
+                    <td th:text="${user.firstName}"></td>
+                    <td th:text="${user.lastName}"></td>
                 </tr>
             </th:block>
         </table>
@@ -26,7 +30,6 @@
     </div>
     <div class="row">
         <div class="btn-group" role="group" aria-label="...">
-            <a href="/admin/devicetype/add" class="btn btn-large btn-default" role="button">Add a Type</a>
         </div>
     </div>
 </div>
