@@ -24,8 +24,7 @@ public class UserDevice implements java.io.Serializable {
     @Column(name="serial_number")
     private String serialNumber;
 
-    @Column(name="active")
-    private boolean isActive;
+    private boolean active;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -33,11 +32,11 @@ public class UserDevice implements java.io.Serializable {
 
     public UserDevice() {}
 
-    public UserDevice(Device device, String name, String serialNumber, boolean isActive) {
+    public UserDevice(Device device, String name, String serialNumber, boolean active) {
         this.device = device;
         this.name = name;
         this.serialNumber = serialNumber;
-        this.isActive = isActive;
+        this.active = active;
     }
 
     public int getId() {
@@ -72,12 +71,12 @@ public class UserDevice implements java.io.Serializable {
         this.serialNumber = serialNumber;
     }
 
-    public boolean isActive() {
-        return isActive;
+    public boolean getActive() {
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        active = active;
     }
 
     public UserFitnessProfile getUserFitnessProfile() {
@@ -102,7 +101,7 @@ public class UserDevice implements java.io.Serializable {
         UserDevice that = (UserDevice) o;
 
         return new EqualsBuilder()
-                .append(isActive, that.isActive)
+                .append(active, that.active)
                 .append(device, that.device)
                 .append(name, that.name)
                 .append(serialNumber, that.serialNumber)
@@ -116,7 +115,7 @@ public class UserDevice implements java.io.Serializable {
                 .append(device)
                 .append(name)
                 .append(serialNumber)
-                .append(isActive)
+                .append(active)
                 .append(userFitnessProfile)
                 .toHashCode();
     }

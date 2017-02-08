@@ -2,6 +2,7 @@ package za.co.entelect.jbootcamp.domain;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -19,7 +20,7 @@ public class UserFitnessMeasurement implements java.io.Serializable {
     @JoinColumn(name = "user_device_id", nullable = false)
     private UserDevice userDevice;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name="date_time_logged")
     private Date dateLogged;
 

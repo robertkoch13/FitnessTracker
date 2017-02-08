@@ -9,21 +9,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import za.co.entelect.jbootcamp.domain.Device;
-import za.co.entelect.jbootcamp.domain.UserDevice;
-import za.co.entelect.jbootcamp.domain.UserFitnessProfile;
-import za.co.entelect.jbootcamp.domain.UserGoal;
+import za.co.entelect.jbootcamp.domain.*;
 import za.co.entelect.jbootcamp.enums.Gender;
 import za.co.entelect.jbootcamp.enums.SystemOfMeasurement;
 import za.co.entelect.jbootcamp.models.UserDeviceModel;
 import za.co.entelect.jbootcamp.models.UserFitnessProfileModel;
-import za.co.entelect.jbootcamp.services.DeviceService;
-import za.co.entelect.jbootcamp.services.UserDeviceService;
-import za.co.entelect.jbootcamp.services.UserGoalService;
-import za.co.entelect.jbootcamp.services.UserProfileService;
+import za.co.entelect.jbootcamp.services.*;
 import za.co.entelect.jbootcamp.utils.PagingBuilder;
 
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -33,6 +29,7 @@ public class UserProfileController {
     private UserDeviceService userDeviceService;
     private DeviceService deviceService;
     private UserGoalService userGoalService;
+    private UserFitnessMeasurementService userFitnessMeasurementService;
     private PagingBuilder pagingBuilder;
 
     @Autowired
@@ -40,11 +37,13 @@ public class UserProfileController {
                                  UserDeviceService userDeviceService,
                                  DeviceService deviceService,
                                  UserGoalService userGoalService,
+                                 UserFitnessMeasurementService userFitnessMeasurementService,
                                  PagingBuilder pagingBuilder) {
         this.userProfileService = userProfileService;
         this.userDeviceService = userDeviceService;
         this.deviceService = deviceService;
         this.userGoalService = userGoalService;
+        this.userFitnessMeasurementService = userFitnessMeasurementService;
         this.pagingBuilder = pagingBuilder;
     }
 
@@ -77,6 +76,24 @@ public class UserProfileController {
     @PostMapping("/dashboard/mydevice/add")
     public String addDeviceSubmit(@ModelAttribute UserDeviceModel device) {
         userDeviceService.addDeviceToUser(getPrincipal(), device.getDeviceId(), device.getName(), device.getSerialNumber(), true);
+        return "redirect:/mydevices";
+    }
+
+    @GetMapping("/dashboard/mydevice/edit")
+    public String editDevice(@RequestParam("id") int id, Model model) {
+        UserDevice userDevice = userDeviceService.findById(id);
+        model.addAttribute("device", new UserDeviceModel(userDevice.getDevice().getId(), userDevice.getName(), userDevice.getSerialNumber(), userDevice.getActive()));
+        model.addAttribute("collection", userFitnessMeasurementService.findDevicesByUserDeviceLastMonth(userDevice.getName()));
+        return "dashboard/editDevice";
+    }
+
+    @PostMapping("/dashboard/mydevice/edit")
+    public String editDeviceSubmit(@ModelAttribute UserDeviceModel device) {
+        UserDevice userDevice = userDeviceService.findById(device.getDeviceId());
+        userDevice.setName(device.getName());
+        userDevice.setActive(device.getActive());
+        userDevice.setSerialNumber(device.getSerialNumber());
+        userDeviceService.update(userDevice);
         return "redirect:/mydevices";
     }
 

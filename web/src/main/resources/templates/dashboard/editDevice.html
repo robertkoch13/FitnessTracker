@@ -11,7 +11,7 @@
 <div layout:fragment="layout282">
     <form action="#" th:action="@{/dashboard/mydevice/edit}" th:object="${device}" method="post">
         <div class="input-group input-group-lg">
-            <div th:replace="devices/deviceViewSingle :: deviceViewSingle"></div>
+            <div th:replace="dashboard/deviceViewSingle :: deviceViewSingle"></div>
             <div class="row">
                 <div class="btn-group">
                     <button type="submit" class="btn btn-large btn-default">Save</button>
@@ -19,6 +19,13 @@
             </div>
         </div>
     </form>
+    <div class="row">
+        <label class="label label-info" >(Data limited to last month)</label>
+    </div>
+    <div class="row">
+        <div th:replace="dashboard/userMeasurementsList :: userMeasurementList"></div>
+    </div>
+
 </div>
 </body>
 <th:block layout:fragment="scripts">

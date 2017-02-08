@@ -4,15 +4,15 @@ public class UserDeviceModel {
     private int deviceId;
     private String name;
     private String serialNumber;
-    private boolean isActive;
+    private boolean active;
 
     public UserDeviceModel() {}
 
-    public UserDeviceModel(int deviceId, String name, String serialNumber, boolean isActive) {
+    public UserDeviceModel(int deviceId, String name, String serialNumber, boolean active) {
         this.deviceId = deviceId;
         this.name = name;
         this.serialNumber = serialNumber;
-        this.isActive = isActive;
+        this.active = active;
     }
 
     public int getDeviceId() {
@@ -39,11 +39,11 @@ public class UserDeviceModel {
         this.serialNumber = serialNumber;
     }
 
-    public boolean isActive() {
-        return isActive;
+    public boolean getActive() {
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        active = active;
     }
 }

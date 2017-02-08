@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div th:fragment="userMeasurementList">
+    <div class="row">
+        <table class="table">
+            <tr>
+                <th>Date and Time</th>
+                <th>Measurement Type</th>
+                <th>Measurement Value</th>
+                <th>Accuracy</th>
+                <th>Source</th>
+            </tr>
+            <th:block th:each="usermeasurement : ${collection}">
+                <tr>
+                    <td th:text="${#dates.format(usermeasurement.dateLogged, 'yyyy-MM-dd HH:mm')}"></td>
+                    <td th:text="${usermeasurement.measurementType.name}"></td>
+                    <td th:text="${usermeasurement.measurementValue}"></td>
+                    <td th:text="${usermeasurement.measurementAccuracy}"></td>
+                    <td th:text="${usermeasurement.userDevice.name}"></td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+</div>
+
+</html>
