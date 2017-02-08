@@ -3,7 +3,10 @@ package za.co.entelect.jbootcamp.services;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import za.co.entelect.jbootcamp.domain.UserProfile;
+import za.co.entelect.jbootcamp.enums.Gender;
+import za.co.entelect.jbootcamp.enums.SystemOfMeasurement;
 
+import java.util.Date;
 import java.util.List;
 
 public interface UserProfileService {
@@ -20,4 +23,6 @@ public interface UserProfileService {
     UserProfile createUserProfile(String username, String password, String firstname, String lastname);
     UserProfile addRoleToUserProfile(UserProfile userProfile, String role);
     UserProfile addRoleToUserProfile(String username, String role);
+    List<String> getRoles(String username);
+    UserProfile updateUserFitnessProfile(String username, Gender gender, SystemOfMeasurement systemOfMeasurement, Date dob);
 }

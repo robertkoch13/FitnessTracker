@@ -1,20 +1,23 @@
 package za.co.entelect.jbootcamp.models;
 
-import za.co.entelect.jbootcamp.domain.UserProfile;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EditUser {
     private String firstName;
     private String lastName;
     private String username;
     private int id;
+    private List<String> roles = new ArrayList<>();
 
     public EditUser() {}
 
-    public EditUser(UserProfile userProfile) {
-        this.firstName = userProfile.getFirstName();
-        this.lastName = userProfile.getLastName();
-        this.username = userProfile.getUsername();
-        this.id = userProfile.getId();
+    public EditUser(String firstName, String lastName, String username, int id, List<String> roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.id = id;
+        this.roles = roles;
     }
 
     public int getId() {
@@ -47,5 +50,13 @@ public class EditUser {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 }

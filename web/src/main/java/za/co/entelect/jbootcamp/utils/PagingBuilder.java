@@ -3,6 +3,7 @@ package za.co.entelect.jbootcamp.utils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.servlet.ModelAndView;
 
 public class PagingBuilder {
@@ -37,8 +38,15 @@ public class PagingBuilder {
 
         Pager pager = new Pager(collection.getTotalPages(), collection.getNumber(), BUTTONS_TO_SHOW);
 
+        String selectedSort = "";
+        if(pageable.getSort() != null) {
+            for(Sort.Order orders : pageable.getSort()) {
+                selectedSort = orders.getProperty();
+            }
+        }
         modelAndView.addObject("collection", collection);
         modelAndView.addObject("selectedPageSize", pageable.getPageSize());
+        modelAndView.addObject("selectedSort", selectedSort);
         modelAndView.addObject("pageSizes", PAGE_SIZES);
         modelAndView.addObject("pager", pager);
         return modelAndView;

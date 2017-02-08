@@ -32,6 +32,9 @@ public class UserProfile implements java.io.Serializable {
             inverseJoinColumns=@JoinColumn(name="role_id"))
     private List<Role> roles = new ArrayList<>();
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "userProfile", fetch = FetchType.LAZY)
+    private UserFitnessProfile userFitnessProfile;
+
     public UserProfile() {}
 
     public UserProfile(String username, String password, String firstName, String lastName) {
@@ -95,6 +98,14 @@ public class UserProfile implements java.io.Serializable {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public UserFitnessProfile getUserFitnessProfile() {
+        return userFitnessProfile;
+    }
+
+    public void setUserFitnessProfile(UserFitnessProfile userFitnessProfile) {
+        this.userFitnessProfile = userFitnessProfile;
     }
 
     @Override

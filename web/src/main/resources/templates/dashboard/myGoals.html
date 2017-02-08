@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="main/layout282" th:with="page='mygoals'">
+<head>
+    <title>My Goals</title>
+    <link rel="stylesheet" href="/resources/css/core.css"/>
+</head>
+<body>
+<div layout:fragment="layout282">
+    <div class="row">
+        <table class="table">
+            <tr>
+                <th>Goal Type</th>
+                <th>Measurement Type</th>
+                <th>Goal Value</th>
+                <th>Goal Date</th>
+                <th>Date Completed</th>
+            </tr>
+            <th:block th:each="goal : ${collection}">
+                <tr>
+<!--
+                    <td><a th:href="@{/dashboard/mygoal/edit(id=${goal.id})}" th:text="${goal.goalType.goalType}"></a></td>
+-->
+                    <td th:text="${goal.goalType.goalType}"></td>
+                    <td th:text="${goal.measurementType.name}"></td>
+                    <td th:text="${goal.goalValue}"></td>
+                    <td th:text="${goal.goalDate}"></td>
+                    <td th:text="${goal.goalType}"></td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+    <div class="row">
+        <div th:replace="main/pageBar :: paginationbar"></div>
+    </div>
+    <div class="row">
+<!--
+        <div class="btn-group" role="group" aria-label="...">
+            <a href="/dashboard/mygoal/add" class="btn btn-large btn-default" role="button">Add a Goal</a>
+        </div>
+-->
+    </div>
+</div>
+</body>
+<th:block layout:fragment="scripts">
+</th:block>
+</html>

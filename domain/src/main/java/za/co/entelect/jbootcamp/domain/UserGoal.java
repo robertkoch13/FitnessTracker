@@ -41,6 +41,10 @@ public class UserGoal implements java.io.Serializable {
     @JoinColumn(name = "measurement_type_id", nullable = false)
     private MeasurementType measurementType;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserFitnessProfile userFitnessProfile;
+
     public UserGoal() {}
 
     public UserGoal(GoalType goalType, boolean isEnabled, Date dateLogged, Date goalDate, double goalValue, MeasurementType measurementType) {
@@ -125,6 +129,14 @@ public class UserGoal implements java.io.Serializable {
 
     public void setMeasurementType(MeasurementType measurementType) {
         this.measurementType = measurementType;
+    }
+
+    public UserFitnessProfile getUserFitnessProfile() {
+        return userFitnessProfile;
+    }
+
+    public void setUserFitnessProfile(UserFitnessProfile userFitnessProfile) {
+        this.userFitnessProfile = userFitnessProfile;
     }
 
     @Override

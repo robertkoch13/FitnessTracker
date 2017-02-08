@@ -2,6 +2,8 @@ package za.co.entelect.jbootcamp.domain;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import za.co.entelect.jbootcamp.enums.Gender;
+import za.co.entelect.jbootcamp.enums.SystemOfMeasurement;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,45 +15,44 @@ import java.util.List;
 public class UserFitnessProfile implements java.io.Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="user_id")
+    @Column(name = "user_id")
     private int id;
 
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
 
     @Column(name="system_of_measurement_preference")
-    private String systemOfMeasurementPreference;
+    @Enumerated(EnumType.STRING)
+    private SystemOfMeasurement systemOfMeasurementPreference;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "userFitnessProfile", cascade = {CascadeType.ALL})
     private List<UserDevice> userDevices = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    @JoinTable(name="device_measurement_types",
-            joinColumns=@JoinColumn(name="device_id"),
-            inverseJoinColumns=@JoinColumn(name="measurement_type_id"))
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userFitnessProfile", cascade = {CascadeType.ALL})
     private List<UserGoal> userGoals = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "userFitnessProfile", cascade = {CascadeType.ALL})
     private List<UserFitnessMeasurement> userFitnessMeasurements = new ArrayList<>();
 
+    @MapsId
     @OneToOne(fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn
+    @JoinColumn(name = "user_id")
     private UserProfile userProfile;
 
     public UserFitnessProfile() {}
 
-    public UserFitnessProfile(String gender, Date dateOfBirth, String systemOfMeasurementPreference, UserProfile userProfile) {
+    public UserFitnessProfile(Gender gender, Date dateOfBirth, SystemOfMeasurement systemOfMeasurementPreference, UserProfile userProfile) {
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.systemOfMeasurementPreference = systemOfMeasurementPreference;
         this.userProfile = userProfile;
     }
 
-    public UserFitnessProfile(int id, String gender, Date dateOfBirth, String systemOfMeasurementPreference, List<UserDevice> userDevices, List<UserGoal> userGoals, List<UserFitnessMeasurement> userFitnessMeasurements, UserProfile userProfile) {
+    public UserFitnessProfile(int id, Gender gender, Date dateOfBirth, SystemOfMeasurement systemOfMeasurementPreference, List<UserDevice> userDevices, List<UserGoal> userGoals, List<UserFitnessMeasurement> userFitnessMeasurements, UserProfile userProfile) {
         this.id = id;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
@@ -70,11 +71,11 @@ public class UserFitnessProfile implements java.io.Serializable {
         this.id = id;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -86,11 +87,11 @@ public class UserFitnessProfile implements java.io.Serializable {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getSystemOfMeasurementPreference() {
+    public SystemOfMeasurement getSystemOfMeasurementPreference() {
         return systemOfMeasurementPreference;
     }
 
-    public void setSystemOfMeasurementPreference(String systemOfMeasurementPreference) {
+    public void setSystemOfMeasurementPreference(SystemOfMeasurement systemOfMeasurementPreference) {
         this.systemOfMeasurementPreference = systemOfMeasurementPreference;
     }
 

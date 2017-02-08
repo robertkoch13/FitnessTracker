@@ -42,7 +42,14 @@ public class UserController {
 
     @GetMapping("/admin/user/edit")
     public String editUser(@RequestParam("id") int id, Model model) {
-        model.addAttribute("user", new EditUser(userProfileService.findById(id)));
+        UserProfile user = userProfileService.findById(id);
+        model.addAttribute("user", new EditUser(
+                user.getFirstName(),
+                user.getLastName(),
+                user.getUsername(),
+                user.getId(),
+                userProfileService.getRoles(user.getUsername())
+        ));
         return "users/editUser";
     }
 

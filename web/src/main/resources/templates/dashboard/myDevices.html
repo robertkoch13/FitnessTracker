@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="main/layout282" th:with="page='mydevices'">
+<head>
+    <title>My Devices</title>
+    <link rel="stylesheet" href="/resources/css/core.css"/>
+</head>
+<body>
+<div layout:fragment="layout282">
+    <div class="row">
+        <table class="table">
+            <tr>
+                <th>Reference Name</th>
+                <th>Serial Number</th>
+                <th>Device Name</th>
+                <th>Device Model</th>
+                <th>Device Manufacturer</th>
+                <th>Device Type</th>
+            </tr>
+            <th:block th:each="userdevice : ${collection}">
+                <tr>
+                    <td><a th:href="@{/dashboard/mydevice/edit(id=${userdevice.id})}" th:text="${userdevice.name}"></a></td>
+                    <td th:text="${userdevice.serialNumber}"></td>
+                    <td th:text="${userdevice.device.deviceName}"></td>
+                    <td th:text="${userdevice.device.model}"></td>
+                    <td th:text="${userdevice.device.deviceManufacturer.name}"></td>
+                    <td th:text="${userdevice.device.deviceType.name}"></td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+    <div class="row">
+        <div th:replace="main/pageBar :: paginationbar"></div>
+    </div>
+    <div class="row">
+        <div class="btn-group" role="group" aria-label="...">
+            <a href="/dashboard/mydevice/add" class="btn btn-large btn-default" role="button">Add a Device</a>
+        </div>
+    </div>
+</div>
+</body>
+<th:block layout:fragment="scripts">
+</th:block>
+</html>

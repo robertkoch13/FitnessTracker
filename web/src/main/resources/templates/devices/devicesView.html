@@ -12,10 +12,10 @@
     <div class="row">
         <table class="table">
             <tr>
-                <th>Device Name</th>
-                <th>Device Manufacturer</th>
-                <th>Device Type</th>
-                <th>Device Model</th>
+                <th><a th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=1, sort=${'deviceName'})}">Device Name</a></th>
+                <th><a th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=1, sort=${'deviceManufacturer.name'})}">Device Manufacturer</a></th>
+                <th><a th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=1, sort=${'deviceType.name'})}">Device Type</a></th>
+                <th><a th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=1, sort=${'model'})}">Device Model</a></th>
             </tr>
             <th:block th:each="device : ${collection}">
                 <tr>
@@ -39,7 +39,7 @@
     </div>
 </div>
 </body>
-<th:block layout:fragment="devicescripts">
-
+<th:block layout:fragment="scripts">
 </th:block>
+
 </html>

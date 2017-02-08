@@ -56,10 +56,10 @@ public class LoginController {
             BindingResult bindingResult) {
 
         userProfileService.createUserProfile(
-                loginUser.getFirstName(),
-                loginUser.getLastName(),
                 loginUser.getUsername(),
-                passwordEncoder.encode(loginUser.getPassword()));
+                passwordEncoder.encode(loginUser.getPassword()),
+                loginUser.getFirstName(),
+                loginUser.getLastName());
 
         return "redirect:/login";
     }

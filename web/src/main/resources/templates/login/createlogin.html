@@ -22,25 +22,29 @@
             <img src="/resources/images/fitnesstracker.jpg" alt="..." class="img-thumbnail">
             <form name="f" th:action="@{/createlogin}" th:object="${loginUser}" method="post">
                 <fieldset>
-                    <div class="row">
-                        <label for="username">First name</label>
-                        <input type="text" id="firstName" th:field="*{firstName}" />
-                    </div>
-                    <div class="row">
-                        <label for="username">Last Name</label>
-                        <input type="text" id="lastName" th:field="*{lastName}" />
-                    </div>
-                    <div class="row">
-                        <label for="username">Username</label>
-                        <input type="text" id="username" th:field="*{username}" />
-                    </div>
-                    <div class="row">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" th:field="*{password}" />
-                    </div>
-                    <div class="row">
-                        <div class="form-actions">
-                            <button type="submit" class="btn">Create Login</button>
+                    <div class="input-group">
+                        <div class="row">
+                            <label class="label label-default" for="firstName">First name</label>
+                            <input type="text" class="form-control" id="firstName" th:field="*{firstName}" />
+                        </div>
+                        <div class="row">
+                            <label class="label label-default" for="lastName">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" th:field="*{lastName}" />
+                        </div>
+                        <div class="row">
+                            <label class="label label-default" for="username">Username</label>
+                            <input type="text" class="form-control" id="username" th:field="*{username}" />
+                        </div>
+                        <div class="row">
+                            <label class="label label-default" for="password">Password</label>
+                            <input type="password"class="form-control"  id="password" th:field="*{password}" />
+                        </div>
+                        <div class="row">
+                            <div class="form-actions">
+                                <div class="btn-group">
+                                    <button type="submit" class="btn btn-large btn-default">Create Login</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </fieldset>

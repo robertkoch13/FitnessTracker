@@ -16,7 +16,21 @@
         <label class="label label-default" for="lastName">Last Name</label>
         <input type="text" class="form-control" id="lastName" th:field="*{lastName}" placeholder="Last Name" aria-label="...">
     </div>
-        <input type="text" class="hidden" id="id" th:field="*{id}" placeholder="id" aria-label="...">
+     <div class="row">
+         <table class="table">
+             <tr>
+                 <th>Role</th>
+             </tr>
+             <th:block th:each="role : *{roles}">
+                 <tr>
+                     <td th:text="${role}"></td>
+                 </tr>
+             </th:block>
+         </table>
+     </div>
+     <div class="row">
+         <input type="text" class="hidden" id="id" th:field="*{id}" placeholder="id" aria-label="...">
+     </div>
 </div>
 
 </html>

@@ -18,7 +18,15 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li th:classappend="${page == 'dashboard' ? 'active' : ''}"><a href="#" th:href="@{/}">Dashboard</a></li>
+                <li class="dropdown" th:classappend="${page == 'dashboard' || page == 'mydevices' || page == 'mygoals' || page == 'myprofile' ? 'active' : ''}">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dashboard <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li th:classappend="${page == 'dashboard' ? 'active' : ''}"><a href="#" th:href="@{/dashboard}">Dashboard</a></li>
+                        <li th:classappend="${page == 'mydevices' ? 'active' : ''}"><a href="#" th:href="@{/mydevices}">My Devices</a></li>
+                        <li th:classappend="${page == 'mygoals' ? 'active' : ''}"><a href="#" th:href="@{/mygoals}">My Goals</a></li>
+                        <li th:classappend="${page == 'myprofile' ? 'active' : ''}"><a href="#" th:href="@{/myprofile}">My Profile</a></li>
+                    </ul>
+                </li>
                 <li class="dropdown" th:classappend="${page == 'devices' || page == 'devicetypes' || page == 'devicemanufacturers' ? 'active' : ''}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Devices <span class="caret"></span></a>
                     <ul class="dropdown-menu">

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="main/layout282" th:with="page='myprofile'">
+<head>
+    <title>Update Profile</title>
+    <link rel="stylesheet" href="/resources/css/core.css"/>
+    <!-- Bootstrap Date-Picker Plugin -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css"/>
+</head>
+<body>
+<div layout:fragment="layout282">
+    <form action="#" th:action="@{/myprofile}" th:object="${userProfile}" method="post">
+        <div class="input-group input-group-lg">
+            <div class="row">
+                <label class="label label-default" for="gender">Gender</label>
+                <select class="form-control" id="gender" th:field="*{gender}">
+                    <option th:each="gender : ${allGenders}"
+                            th:value="${gender}"
+                            th:text="${gender}">Wireframe</option>
+                </select>
+            </div>
+            <div class="row">
+                <label class="label label-default" for="dob">Date of Birth</label>
+                <input type="text" class="form-control" id="dob" name="dob" th:field="*{dob}" placeholder="YYYY/MM/DD">
+            </div>
+            <div class="row">
+                <label class="label label-default" for="gender">System of Measurement</label>
+                <select class="form-control" id="systemOfMeasurementPreference" th:field="*{systemOfMeasurementPreference}">
+                    <option th:each="systemOfMeasurementPreference : ${allSystemOfMeasurementPreferences}"
+                            th:value="${systemOfMeasurementPreference}"
+                            th:text="${systemOfMeasurementPreference}">Wireframe</option>
+                </select>
+            </div>
+            <input type="text" class="hidden" id="userId" th:field="*{userId}" placeholder="userId" aria-label="...">
+            <div class="row">
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-large btn-default">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+<th:block layout:fragment="scripts">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var date_input=$('input[name="dob"]'); //our date input has the name "date"
+            var options={
+                format: 'yyyy/mm/dd',
+                autoclose: true,
+                orientation: "bottom auto",
+                startView: 3
+            };
+            date_input.datepicker(options);
+        })
+    </script>
+</th:block>
+</html>
