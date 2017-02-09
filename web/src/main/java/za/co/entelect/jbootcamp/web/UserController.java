@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import za.co.entelect.jbootcamp.domain.UserProfile;
-import za.co.entelect.jbootcamp.models.EditUser;
+import za.co.entelect.jbootcamp.models.EditUserModel;
 import za.co.entelect.jbootcamp.services.UserProfileService;
 import za.co.entelect.jbootcamp.utils.PagingBuilder;
 import java.util.Map;
@@ -43,7 +43,7 @@ public class UserController {
     @GetMapping("/admin/user/edit")
     public String editUser(@RequestParam("id") int id, Model model) {
         UserProfile user = userProfileService.findById(id);
-        model.addAttribute("user", new EditUser(
+        model.addAttribute("user", new EditUserModel(
                 user.getFirstName(),
                 user.getLastName(),
                 user.getUsername(),
@@ -54,11 +54,11 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/edit")
-    public String editDeviceSubmit(@ModelAttribute EditUser editUser) {
-        UserProfile userProfile = userProfileService.findById(editUser.getId());
-        userProfile.setFirstName(editUser.getFirstName());
-        userProfile.setLastName(editUser.getLastName());
-        userProfile.setUsername(editUser.getUsername());
+    public String editDeviceSubmit(@ModelAttribute EditUserModel editUserModel) {
+        UserProfile userProfile = userProfileService.findById(editUserModel.getId());
+        userProfile.setFirstName(editUserModel.getFirstName());
+        userProfile.setLastName(editUserModel.getLastName());
+        userProfile.setUsername(editUserModel.getUsername());
         userProfileService.update(userProfile);
         return "redirect:/users";
     }

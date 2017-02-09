@@ -3,21 +3,21 @@ package za.co.entelect.jbootcamp.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchObject {
+public class SearchObjectModel {
     private String property;
     private String value;
     private List<String> allSearchProperties = new ArrayList<>();
 
-    public SearchObject() {
+    public SearchObjectModel() {
     }
 
-    public SearchObject(String property, String value, List<String> allSearchProperties) {
+    public SearchObjectModel(String property, String value, List<String> allSearchProperties) {
         this.property = property;
         this.value = value;
         this.allSearchProperties = allSearchProperties;
     }
 
-    public SearchObject(String property, String value) {
+    public SearchObjectModel(String property, String value) {
         this.property = property;
         this.value = value;
     }

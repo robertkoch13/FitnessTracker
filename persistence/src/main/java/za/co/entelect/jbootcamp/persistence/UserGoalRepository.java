@@ -7,4 +7,5 @@ import za.co.entelect.jbootcamp.domain.UserGoal;
 
 public interface UserGoalRepository extends JpaRepository<UserGoal, Integer> {
     Page<UserGoal> findByUserFitnessProfileId(int userId, Pageable pageable);
+    UserGoal findByUserFitnessProfileIdAndMeasurementTypeId(int userId, int measurementTypeId);
 }

@@ -3,6 +3,8 @@ package za.co.entelect.jbootcamp.services;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import za.co.entelect.jbootcamp.domain.UserFitnessMeasurement;
+import za.co.entelect.jbootcamp.services.model.UserFitnessMeasurementModel;
+import za.co.entelect.jbootcamp.services.model.UserFitnessMeasurementsFrequency;
 
 import java.util.Date;
 import java.util.List;
@@ -18,4 +20,9 @@ public interface UserFitnessMeasurementService {
     UserFitnessMeasurement update(UserFitnessMeasurement object);
     List<String> getSearchProperties();
     List<UserFitnessMeasurement> findDevicesByUserDeviceLastMonth(String userDeviceName);
+    UserFitnessMeasurementModel getCalculatedMeasurements(int userId,
+                                                                String measurementTypeName,
+                                                                Date fromDate,
+                                                                Date toDate,
+                                                                UserFitnessMeasurementsFrequency userFitnessMeasurementsFrequency);
 }

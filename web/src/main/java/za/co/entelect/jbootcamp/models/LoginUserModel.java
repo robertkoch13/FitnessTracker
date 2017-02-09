@@ -3,7 +3,7 @@ package za.co.entelect.jbootcamp.models;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class LoginUser {
+public class LoginUserModel {
 
     @NotNull
     private String username;
@@ -13,7 +13,7 @@ public class LoginUser {
     private String firstName;
     private String lastName;
 
-    public LoginUser() {
+    public LoginUserModel() {
 
     }
 

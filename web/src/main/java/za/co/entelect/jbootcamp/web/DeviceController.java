@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import za.co.entelect.jbootcamp.domain.Device;
 import za.co.entelect.jbootcamp.domain.DeviceManufacturer;
 import za.co.entelect.jbootcamp.domain.DeviceType;
-import za.co.entelect.jbootcamp.models.SearchObject;
+import za.co.entelect.jbootcamp.models.SearchObjectModel;
 import za.co.entelect.jbootcamp.services.DeviceManufacturerService;
 import za.co.entelect.jbootcamp.services.DeviceService;
 import za.co.entelect.jbootcamp.services.DeviceTypeService;
@@ -61,13 +61,13 @@ public class DeviceController {
 
     @GetMapping("/devices/search")
     public String deviceSearchForm(Model model) {
-        model.addAttribute("searchObject", new SearchObject("Device Name", "", deviceService.getSearchProperties()));
+        model.addAttribute("searchObject", new SearchObjectModel("Device Name", "", deviceService.getSearchProperties()));
         return "devices/devicesSearch";
     }
 
     @PostMapping("/devices/search")
-    public String deviceSearchSubmit(@ModelAttribute SearchObject searchObject) {
-        return String.format("redirect:/devices/%s/%s", searchObject.getProperty(), searchObject.getValue());
+    public String deviceSearchSubmit(@ModelAttribute SearchObjectModel searchObjectModel) {
+        return String.format("redirect:/devices/%s/%s", searchObjectModel.getProperty(), searchObjectModel.getValue());
     }
 
     @GetMapping("/admin/device/add")

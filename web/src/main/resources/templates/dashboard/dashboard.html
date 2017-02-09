@@ -2,17 +2,93 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="main/default"  th:with="page='dashboard'">
+      layout:decorator="main/layout282"  th:with="page='dashboard'">
 <head>
-    <title>Home</title>
-    <link rel="stylesheet" href="/resources/css/core.css"/>
+    <title>Dashboard</title>
 </head>
 <body>
-<div layout:fragment="content">
-    Welcome!
+<div layout:fragment="layout282">
+    <div class="row">
+        <form action="#" th:action="@{/dashboard}" th:object="${dashboardFilterObject}" method="post">
+            <div class="input-group input-group-lg">
+                <label class="label label-default" for="measurementType">Measurement Type</label>
+                <select class="form-control" id="measurementType" th:field="*{measurementType}">
+                    <option th:each="measurementType : ${allMeasurementTypes}"
+                            th:value="${measurementType}"
+                            th:text="${measurementType}">Wireframe</option>
+                </select>
+                <label class="label label-default" for="fromDate">From Date</label>
+                <input type="text" class="form-control" id="fromDate" name="fromDate" th:field="*{fromDate}" placeholder="YYYY/MM/DD">
+                <label class="label label-default" for="toDate">To Date</label>
+                <input type="text" class="form-control" id="toDate" name="toDate" th:field="*{toDate}" placeholder="YYYY/MM/DD">
+                <label class="label label-default" for="frequency">Report by</label>
+                <select class="form-control" id="frequency" th:field="*{frequency}">
+                    <option th:each="frequency : ${allUserFitnessMeasurementsFrequencies}"
+                            th:value="${frequency}"
+                            th:text="${frequency}">Wireframe</option>
+                </select>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-large btn-default">Add</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:if="${measurementCalculation}">
+        <div class="row">
+            <div class="col-md-4">
+                <p><b>Report for:</b> <span th:text="${measurementCalculation.measurementType}"></span></p>
+                <p><b>Date from:</b> <span th:text="${#dates.format(measurementCalculation.fromDate, 'yyyy-MM-dd')}"></span></p>
+                <p><b>Date to:</b> <span th:text="${#dates.format(measurementCalculation.toDate, 'yyyy-MM-dd')}"></span></p>
+                <p><b>Goal Date:</b> <span th:text="${#dates.format(measurementCalculation.goalDate, 'yyyy-MM-dd')}"></span></p>
+                <p><b>Target value:</b> <span th:text="${measurementCalculation.goalValue}"></span></p>
+            </div>
+            <div class="col-md-4">
+                <div id="chart_div"></div>
+            </div>
+        </div>
+
+        <table class="table">
+            <tr>
+                <th>Date</th>
+                <th>Minimum</th>
+                <th>Maximum</th>
+                <th>Average</th>
+            </tr>
+            <th:block th:each="calc : ${measurementCalculation.userFitnessMeasurementCalculationsDTOList}">
+                <tr>
+                    <td th:text="${calc.dateValue}"></td>
+                    <td th:text="${calc.minValue}"></td>
+                    <td th:text="${calc.maxValue}"></td>
+                    <td th:text="${calc.averageValue}"></td>
+                </tr>
+            </th:block>
+        </table>
+    </th:block>
 </div>
 </body>
 <th:block layout:fragment="scripts">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawVisualization);
+
+
+        function drawVisualization() {
+            // Some raw data (not necessarily accurate)
+            var data = google.visualization.arrayToDataTable(/*[[${measurementCalculation.chartData}]]*/);
+
+            var options = {
+                title : 'Goal progress over period',
+                vAxis: {title: 'Value'},
+                hAxis: {title: 'Period'},
+                seriesType: 'bars',
+                series: {3: {type: 'line'}}
+            };
+
+            var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
 
 </th:block>
 </html>

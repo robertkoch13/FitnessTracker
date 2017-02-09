@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import za.co.entelect.jbootcamp.models.LoginUser;
+import za.co.entelect.jbootcamp.models.LoginUserModel;
 import za.co.entelect.jbootcamp.services.UserProfileService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,21 +45,21 @@ public class LoginController {
 
     @GetMapping("/createlogin")
     public String createLogin(Model model) {
-        LoginUser loginUser = new LoginUser();
-        model.addAttribute("loginUser", loginUser);
+        LoginUserModel loginUserModel = new LoginUserModel();
+        model.addAttribute("loginUser", loginUserModel);
         return "login/createlogin";
     }
 
     @PostMapping("/createlogin")
     public String createLoginPost(
-            @ModelAttribute("loginUser") @Valid LoginUser loginUser,
+            @ModelAttribute("loginUser") @Valid LoginUserModel loginUserModel,
             BindingResult bindingResult) {
 
         userProfileService.createUserProfile(
-                loginUser.getUsername(),
-                passwordEncoder.encode(loginUser.getPassword()),
-                loginUser.getFirstName(),
-                loginUser.getLastName());
+                loginUserModel.getUsername(),
+                passwordEncoder.encode(loginUserModel.getPassword()),
+                loginUserModel.getFirstName(),
+                loginUserModel.getLastName());
 
         return "redirect:/login";
     }

@@ -3,16 +3,16 @@ package za.co.entelect.jbootcamp.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditUser {
+public class EditUserModel {
     private String firstName;
     private String lastName;
     private String username;
     private int id;
     private List<String> roles = new ArrayList<>();
 
-    public EditUser() {}
+    public EditUserModel() {}
 
-    public EditUser(String firstName, String lastName, String username, int id, List<String> roles) {
+    public EditUserModel(String firstName, String lastName, String username, int id, List<String> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;

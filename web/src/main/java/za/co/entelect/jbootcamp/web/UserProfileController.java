@@ -15,12 +15,11 @@ import za.co.entelect.jbootcamp.enums.SystemOfMeasurement;
 import za.co.entelect.jbootcamp.models.UserDeviceModel;
 import za.co.entelect.jbootcamp.models.UserFitnessProfileModel;
 import za.co.entelect.jbootcamp.services.*;
+import za.co.entelect.jbootcamp.services.model.UserFitnessMeasurementModel;
+import za.co.entelect.jbootcamp.services.model.UserFitnessMeasurementsFrequency;
 import za.co.entelect.jbootcamp.utils.PagingBuilder;
 
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class UserProfileController {
@@ -52,9 +51,17 @@ public class UserProfileController {
         return this.deviceService.findAll();
     }
 
-    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-    public ModelAndView root() {
-        return new ModelAndView("dashboard/dashboard");
+    @RequestMapping(value = {"", "/dashboard"}, method = RequestMethod.GET)
+    public String root(Model model) {
+        UserFitnessMeasurementModel userFitnessMeasurementModel = userFitnessMeasurementService.getCalculatedMeasurements(
+                userProfileService.findByUsername(getPrincipal()).getId(),
+                "Heartrate",
+                new GregorianCalendar(2017, Calendar.FEBRUARY, 1).getTime(),
+                new GregorianCalendar(2017, Calendar.FEBRUARY, 28).getTime(),
+                UserFitnessMeasurementsFrequency.Daily);
+
+        model.addAttribute("measurementCalculation",userFitnessMeasurementModel);
+        return "dashboard/dashboard";
     }
 
     @RequestMapping( "/mydevices" )
