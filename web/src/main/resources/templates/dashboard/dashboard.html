@@ -2,93 +2,152 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="main/layout282"  th:with="page='dashboard'">
+      layout:decorator="main/default"  th:with="page='dashboard'">
 <head>
     <title>Dashboard</title>
+    <!-- Bootstrap Date-Picker Plugin -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css"/>
 </head>
 <body>
-<div layout:fragment="layout282">
-    <div class="row">
+<div layout:fragment="content">
+    <div class="col-md-4">
         <form action="#" th:action="@{/dashboard}" th:object="${dashboardFilterObject}" method="post">
-            <div class="input-group input-group-lg">
-                <label class="label label-default" for="measurementType">Measurement Type</label>
-                <select class="form-control" id="measurementType" th:field="*{measurementType}">
-                    <option th:each="measurementType : ${allMeasurementTypes}"
-                            th:value="${measurementType}"
-                            th:text="${measurementType}">Wireframe</option>
-                </select>
-                <label class="label label-default" for="fromDate">From Date</label>
-                <input type="text" class="form-control" id="fromDate" name="fromDate" th:field="*{fromDate}" placeholder="YYYY/MM/DD">
-                <label class="label label-default" for="toDate">To Date</label>
-                <input type="text" class="form-control" id="toDate" name="toDate" th:field="*{toDate}" placeholder="YYYY/MM/DD">
-                <label class="label label-default" for="frequency">Report by</label>
-                <select class="form-control" id="frequency" th:field="*{frequency}">
-                    <option th:each="frequency : ${allUserFitnessMeasurementsFrequencies}"
-                            th:value="${frequency}"
-                            th:text="${frequency}">Wireframe</option>
-                </select>
-                <div class="btn-group">
-                    <button type="submit" class="btn btn-large btn-default">Add</button>
+            <div class="input-group input-group-sm">
+                <div class="row">
+                    <label class="label label-default" for="measurementType">Measurement Type</label>
+                    <select class="form-control" id="measurementType" th:field="*{measurementType}">
+                        <option th:each="measurementType : ${allMeasurementTypes}"
+                                th:value="${measurementType.name}"
+                                th:text="${measurementType.name}">Wireframe</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <label class="label label-default" for="fromDate">From Date</label>
+                    <input type="text" class="form-control" id="fromDate" name="fromDate" th:field="*{fromDate}" placeholder="YYYY/MM/DD">
+                </div>
+                <div class="row">
+                    <label class="label label-default" for="toDate">To Date</label>
+                    <input type="text" class="form-control" id="toDate" name="toDate" th:field="*{toDate}" placeholder="YYYY/MM/DD">
+                </div>
+                <div class="row">
+                    <label class="label label-default" for="frequency">Report by</label>
+                    <select class="form-control" id="frequency" th:field="*{userFitnessMeasurementsFrequency}">
+                        <option th:each="frequency : ${allUserFitnessMeasurementsFrequencies}"
+                                th:value="${frequency}"
+                                th:text="${frequency}">Wireframe</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-large btn-default">Get Report</button>
+                    </div>
                 </div>
             </div>
         </form>
     </div>
     <th:block th:if="${measurementCalculation}">
-        <div class="row">
-            <div class="col-md-4">
-                <p><b>Report for:</b> <span th:text="${measurementCalculation.measurementType}"></span></p>
-                <p><b>Date from:</b> <span th:text="${#dates.format(measurementCalculation.fromDate, 'yyyy-MM-dd')}"></span></p>
-                <p><b>Date to:</b> <span th:text="${#dates.format(measurementCalculation.toDate, 'yyyy-MM-dd')}"></span></p>
-                <p><b>Goal Date:</b> <span th:text="${#dates.format(measurementCalculation.goalDate, 'yyyy-MM-dd')}"></span></p>
-                <p><b>Target value:</b> <span th:text="${measurementCalculation.goalValue}"></span></p>
-            </div>
-            <div class="col-md-4">
-                <div id="chart_div"></div>
-            </div>
-        </div>
+        <div class="col-md-8">
 
-        <table class="table">
-            <tr>
-                <th>Date</th>
-                <th>Minimum</th>
-                <th>Maximum</th>
-                <th>Average</th>
-            </tr>
-            <th:block th:each="calc : ${measurementCalculation.userFitnessMeasurementCalculationsDTOList}">
+            <div class="row">
+                <div class="col-md-4">
+                    <p><b>Report for:</b> <span th:text="${measurementCalculation.measurementType}"></span></p>
+                    <p><b>Date from:</b> <span th:text="${#dates.format(measurementCalculation.fromDate, 'yyyy-MM-dd')}"></span></p>
+                    <p><b>Date to:</b> <span th:text="${#dates.format(measurementCalculation.toDate, 'yyyy-MM-dd')}"></span></p>
+                    <p><b>Goal Date:</b> <span th:text="${#dates.format(measurementCalculation.goalDate, 'yyyy-MM-dd')}"></span></p>
+                    <p><b>Target value:</b> <span th:text="${measurementCalculation.goalValue}"></span></p>
+                </div>
+                <div class="col-md-4">
+                    <th:block th:if="${not #lists.isEmpty(measurementCalculation.userFitnessMeasurementCalculationsDTOList)}">
+                        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                        <script type="text/javascript" th:inline="javascript">
+                            google.charts.load('current', {'packages':['corechart']});
+                            google.charts.setOnLoadCallback(drawVisualization);
+
+
+                            function drawVisualization() {
+                                // Some raw data (not necessarily accurate)
+                                var data = google.visualization.arrayToDataTable(/*[[${measurementCalculation.chartData}]]*/);
+
+                                var options = {
+                                    title : 'Goal progress over period',
+                                    vAxis: {title: 'Value'},
+                                    hAxis: {title: 'Period'},
+                                    seriesType: 'bars',
+                                    series: {3: {type: 'line'}}
+                                };
+
+                                var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+                                chart.draw(data, options);
+                            }
+                        </script>
+                        <div id="chart_div"></div>
+                    </th:block>
+                </div>
+            </div>
+
+            <table class="table">
                 <tr>
-                    <td th:text="${calc.dateValue}"></td>
-                    <td th:text="${calc.minValue}"></td>
-                    <td th:text="${calc.maxValue}"></td>
-                    <td th:text="${calc.averageValue}"></td>
+                    <th>Date</th>
+                    <th>Minimum</th>
+                    <th>Maximum</th>
+                    <th>Average</th>
                 </tr>
-            </th:block>
-        </table>
+                <tbody th:if="${not #lists.isEmpty(measurementCalculation.userFitnessMeasurementCalculationsDTOList)}">
+                    <tr th:each="calc : ${measurementCalculation.userFitnessMeasurementCalculationsDTOList}">
+                        <td th:text="${calc.dateValue}"></td>
+                        <td th:text="${calc.minValue}"></td>
+                        <td th:text="${calc.maxValue}"></td>
+                        <td th:text="${calc.averageValue}"></td>
+                    </tr>
+                </tbody>
+                <tbody th:if="${#lists.isEmpty(measurementCalculation.userFitnessMeasurementCalculationsDTOList)}">
+                    <tr>
+                        <td colspan="3">No Data found</td>
+                    </tr>
+                </tbody>
+<!--
+                <th:block th:each="calc : ${measurementCalculation.userFitnessMeasurementCalculationsDTOList}">
+                    <tr>
+                        <td th:text="${calc.dateValue}"></td>
+                        <td th:text="${calc.minValue}"></td>
+                        <td th:text="${calc.maxValue}"></td>
+                        <td th:text="${calc.averageValue}"></td>
+                    </tr>
+                </th:block>
+-->
+            </table>
+        </div>
     </th:block>
 </div>
 </body>
 <th:block layout:fragment="scripts">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript" th:inline="javascript">
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawVisualization);
 
-
-        function drawVisualization() {
-            // Some raw data (not necessarily accurate)
-            var data = google.visualization.arrayToDataTable(/*[[${measurementCalculation.chartData}]]*/);
-
-            var options = {
-                title : 'Goal progress over period',
-                vAxis: {title: 'Value'},
-                hAxis: {title: 'Period'},
-                seriesType: 'bars',
-                series: {3: {type: 'line'}}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var date_input=$('input[name="fromDate"]'); //our date input has the name "date"
+            var options={
+                format: 'yyyy/mm/dd',
+                autoclose: true,
+                orientation: "bottom auto",
+                startView: 1
             };
-
-            var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-            chart.draw(data, options);
-        }
+            date_input.datepicker(options);
+        })
     </script>
+    <script>
+        $(document).ready(function(){
+            var date_input=$('input[name="toDate"]'); //our date input has the name "date"
+            var options={
+                format: 'yyyy/mm/dd',
+                autoclose: true,
+                orientation: "bottom auto",
+                startView: 1
+            };
+            date_input.datepicker(options);
+        })
+    </script>
+
 
 </th:block>
 </html>

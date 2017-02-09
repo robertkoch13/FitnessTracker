@@ -1,5 +1,6 @@
 package za.co.entelect.jbootcamp.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import za.co.entelect.jbootcamp.services.model.UserFitnessMeasurementsFrequency;
 
 import java.util.Date;
@@ -7,10 +8,17 @@ import java.util.Date;
 public class DashboardFilterObjectModel {
     private String measurementType;
     private UserFitnessMeasurementsFrequency userFitnessMeasurementsFrequency;
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date fromDate;
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date toDate;
 
     public DashboardFilterObjectModel() {
+    }
+
+    public DashboardFilterObjectModel(Date fromDate, Date toDate) {
+        this.fromDate = fromDate;
+        this.toDate = toDate;
     }
 
     public DashboardFilterObjectModel(String measurementType, UserFitnessMeasurementsFrequency userFitnessMeasurementsFrequency, Date fromDate, Date toDate) {

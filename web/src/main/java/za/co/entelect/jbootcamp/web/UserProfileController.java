@@ -12,13 +12,18 @@ import org.springframework.web.servlet.ModelAndView;
 import za.co.entelect.jbootcamp.domain.*;
 import za.co.entelect.jbootcamp.enums.Gender;
 import za.co.entelect.jbootcamp.enums.SystemOfMeasurement;
+import za.co.entelect.jbootcamp.models.DashboardFilterObjectModel;
+import za.co.entelect.jbootcamp.models.SearchObjectModel;
 import za.co.entelect.jbootcamp.models.UserDeviceModel;
 import za.co.entelect.jbootcamp.models.UserFitnessProfileModel;
 import za.co.entelect.jbootcamp.services.*;
 import za.co.entelect.jbootcamp.services.model.UserFitnessMeasurementModel;
 import za.co.entelect.jbootcamp.services.model.UserFitnessMeasurementsFrequency;
+import za.co.entelect.jbootcamp.utils.MyUtils;
 import za.co.entelect.jbootcamp.utils.PagingBuilder;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -29,6 +34,7 @@ public class UserProfileController {
     private DeviceService deviceService;
     private UserGoalService userGoalService;
     private UserFitnessMeasurementService userFitnessMeasurementService;
+    private MeasurementTypeService measurementTypeService;
     private PagingBuilder pagingBuilder;
 
     @Autowired
@@ -37,12 +43,14 @@ public class UserProfileController {
                                  DeviceService deviceService,
                                  UserGoalService userGoalService,
                                  UserFitnessMeasurementService userFitnessMeasurementService,
+                                 MeasurementTypeService measurementTypeService,
                                  PagingBuilder pagingBuilder) {
         this.userProfileService = userProfileService;
         this.userDeviceService = userDeviceService;
         this.deviceService = deviceService;
         this.userGoalService = userGoalService;
         this.userFitnessMeasurementService = userFitnessMeasurementService;
+        this.measurementTypeService = measurementTypeService;
         this.pagingBuilder = pagingBuilder;
     }
 
@@ -51,17 +59,51 @@ public class UserProfileController {
         return this.deviceService.findAll();
     }
 
-    @RequestMapping(value = {"", "/dashboard"}, method = RequestMethod.GET)
-    public String root(Model model) {
-        UserFitnessMeasurementModel userFitnessMeasurementModel = userFitnessMeasurementService.getCalculatedMeasurements(
-                userProfileService.findByUsername(getPrincipal()).getId(),
-                "Heartrate",
-                new GregorianCalendar(2017, Calendar.FEBRUARY, 1).getTime(),
-                new GregorianCalendar(2017, Calendar.FEBRUARY, 28).getTime(),
-                UserFitnessMeasurementsFrequency.Daily);
+    @GetMapping(value = {"", "/dashboard", "/dashboard/{measurementType}/{frequency}/{fromDate}/{toDate}"})
+    public ModelAndView root(@PathVariable Map<String, String> pathVariables) {
 
-        model.addAttribute("measurementCalculation",userFitnessMeasurementModel);
-        return "dashboard/dashboard";
+        ModelAndView modelAndView = new ModelAndView("dashboard/dashboard");
+
+        if (pathVariables.containsKey("measurementType")
+                & pathVariables.containsKey("frequency")
+                & pathVariables.containsKey("fromDate")
+                & pathVariables.containsKey("toDate")) {
+
+            Date fromDate = MyUtils.convertStringToDate(pathVariables.get("fromDate"), "yyyy-MM-dd");
+            Date toDate = MyUtils.convertStringToDate(pathVariables.get("toDate"), "yyyy-MM-dd");
+            String measurementType = pathVariables.get("measurementType");
+            UserFitnessMeasurementsFrequency frequency = UserFitnessMeasurementsFrequency.valueOf(pathVariables.get("frequency"));
+
+            UserFitnessMeasurementModel userFitnessMeasurementModel = userFitnessMeasurementService.getCalculatedMeasurements(
+                    userProfileService.findByUsername(getPrincipal()).getId(),
+                    measurementType,
+                    fromDate,
+                    toDate,
+                    frequency);
+
+            modelAndView.addObject("measurementCalculation", userFitnessMeasurementModel);
+            modelAndView.addObject("dashboardFilterObject", new DashboardFilterObjectModel(
+                    measurementType, frequency, fromDate, toDate
+            ));
+        }
+        else {
+            modelAndView.addObject("dashboardFilterObject", new DashboardFilterObjectModel(new Date(), new Date()));
+        }
+
+        List<UserFitnessMeasurementsFrequency> userFitnessMeasurementsFrequencies = Arrays.asList(UserFitnessMeasurementsFrequency.values());
+        modelAndView.addObject("allUserFitnessMeasurementsFrequencies",userFitnessMeasurementsFrequencies);
+        modelAndView.addObject("allMeasurementTypes", measurementTypeService.findAll());
+
+        return modelAndView;
+    }
+
+    @PostMapping({"/dashboard", "/"})
+    public String getDashboardReport(@ModelAttribute DashboardFilterObjectModel dashboardFilterObjectModel) {
+        return String.format("redirect:/dashboard/%s/%s/%s/%s",
+                dashboardFilterObjectModel.getMeasurementType(),
+                dashboardFilterObjectModel.getUserFitnessMeasurementsFrequency(),
+                MyUtils.convertDateToString(dashboardFilterObjectModel.getFromDate(),"yyyy-MM-dd"),
+                MyUtils.convertDateToString(dashboardFilterObjectModel.getToDate(),"yyyy-MM-dd"));
     }
 
     @RequestMapping( "/mydevices" )
@@ -130,7 +172,6 @@ public class UserProfileController {
         userProfileService.updateUserFitnessProfile(getPrincipal(), userFitnessProfileModel.getGender(), userFitnessProfileModel.getSystemOfMeasurementPreference(), userFitnessProfileModel.getDob());
         return "redirect:/dashboard";
     }
-
 
     private String getPrincipal(){
         String userName = null;

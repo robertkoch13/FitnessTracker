@@ -11,14 +11,18 @@
 <form action="#" th:action="@{/devices/search}" th:object="${searchObject}" method="post">
     <div class="input-group input-group-lg">
         <div class="row">
-            <select class="form-control" th:field="*{property}">
+            <label class="label label-default" for="property">Property</label>
+            <select class="form-control" id="property" th:field="*{property}">
                 <option th:each="searchProperty : ${searchObject.allSearchProperties}"
                         th:value="${searchProperty}"
                         th:text="${searchProperty}">Wireframe</option>
             </select>
         </div>
         <div class="row">
-            <input type="text" class="form-control" th:field="*{value}" placeholder="Search for..." aria-label="...">
+            <label class="label label-default" for="value">Value</label>
+            <input type="text" class="form-control" id="value" th:field="*{value}" placeholder="Search for..." aria-label="...">
+        </div>
+        <div class="row">
             <div class="btn-group">
                 <button type="submit" class="btn btn-large btn-default">Search</button>
             </div>
