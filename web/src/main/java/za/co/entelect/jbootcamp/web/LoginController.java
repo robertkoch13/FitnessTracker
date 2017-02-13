@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import za.co.entelect.jbootcamp.models.LoginUserModel;
 import za.co.entelect.jbootcamp.services.UserProfileService;
 
@@ -62,6 +63,16 @@ public class LoginController {
                 loginUserModel.getLastName());
 
         return "redirect:/login";
+    }
+
+    @RequestMapping(value = "/access_denied", method = RequestMethod.GET)
+    public ModelAndView accesssDenied() {
+
+        ModelAndView model = new ModelAndView();
+
+        model.setViewName("login/access_denied");
+        return model;
+
     }
 
     private String getPrincipal(){
