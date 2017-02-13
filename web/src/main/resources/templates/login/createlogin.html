@@ -18,37 +18,42 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-6 col-md-offset-3" align="center">
             <img src="/resources/images/fitnesstracker.jpg" alt="..." class="img-thumbnail">
-            <form name="f" th:action="@{/createlogin}" th:object="${loginUser}" method="post">
-                <fieldset>
-                    <div class="input-group">
-                        <div class="row">
-                            <label class="label label-default" for="firstName">First name</label>
-                            <input type="text" class="form-control" id="firstName" th:field="*{firstName}" />
-                        </div>
-                        <div class="row">
-                            <label class="label label-default" for="lastName">Last Name</label>
-                            <input type="text" class="form-control" id="lastName" th:field="*{lastName}" />
-                        </div>
-                        <div class="row">
-                            <label class="label label-default" for="username">Username</label>
-                            <input type="text" class="form-control" id="username" th:field="*{username}" />
-                        </div>
-                        <div class="row">
-                            <label class="label label-default" for="password">Password</label>
-                            <input type="password"class="form-control"  id="password" th:field="*{password}" />
-                        </div>
-                        <div class="row">
-                            <div class="form-actions">
-                                <div class="btn-group">
-                                    <button type="submit" class="btn btn-large btn-default">Create Login</button>
+            <div class="panel panel-info">
+                <legend>Create Login</legend>
+                <div class="panel-body">
+                    <form name="f" th:action="@{/createlogin}" th:object="${loginUser}" method="post">
+                        <fieldset>
+                            <div class="input-group">
+                                <div class="row">
+                                    <label class="label label-default" for="firstName">First name</label>
+                                    <input type="text" class="form-control" id="firstName" th:field="*{firstName}" />
+                                </div>
+                                <div class="row">
+                                    <label class="label label-default" for="lastName">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" th:field="*{lastName}" />
+                                </div>
+                                <div class="row">
+                                    <label class="label label-default" for="username">Username</label>
+                                    <input type="text" class="form-control" id="username" th:field="*{username}" />
+                                </div>
+                                <div class="row">
+                                    <label class="label label-default" for="password">Password</label>
+                                    <input type="password"class="form-control"  id="password" th:field="*{password}" />
+                                </div>
+                                <div class="row">
+                                    <div class="form-actions">
+                                        <div class="btn-group">
+                                            <button type="submit" class="btn btn-large btn-default">Create Login</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </fieldset>
-            </form>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
