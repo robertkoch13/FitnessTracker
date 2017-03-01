@@ -18,11 +18,14 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-md-6 col-md-offset-3" align="center">
-            <img src="/resources/images/fitnesstracker.jpg" alt="..." class="img-thumbnail">
+        <div class="col-md-6 col-md-offset-2">
             <div class="panel panel-info">
                 <legend>Please Login</legend>
                 <div class="panel-body">
+                    <div class="col-md-6" align="center">
+                        <img src="/resources/images/fitnesstracker.jpg" alt="..." class="img-thumbnail">
+                    </div>
+                    <div class="col-md-6" align="center">
                     <form name="f" th:action="@{/login}" method="post">
                         <fieldset>
                             <div th:if="${param.error}" class="alert alert-error">
@@ -51,12 +54,14 @@
                         </fieldset>
                     </form>
                     <a href="/createlogin">New here?  Sign up!</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 

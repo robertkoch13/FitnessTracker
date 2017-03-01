@@ -25,19 +25,19 @@ public class UserController {
         this.pagingBuilder = pagingBuilder;
     }
 
-    @RequestMapping({ "/users/{property}/{value}", "/users" })
-    public ModelAndView showUsers(@PathVariable Map<String, String> pathVariables, Pageable pageable) {
-
+    private ModelAndView getUsersView(Page<UserProfile> userProfiles, Pageable pageable) {
         String viewName = "users/usersView";
+        return pagingBuilder.getModelAndView(viewName, userProfiles, pageable);
+    }
 
-        Page<UserProfile> users;
-        if (pathVariables.containsKey("property") & pathVariables.containsKey("value")) {
-            users = userProfileService.findByProperty(pathVariables.get("property"), pathVariables.get("value"), pageable);
-        } else {
-            users = userProfileService.findAll(pageable);
-        }
+    @GetMapping("/users" )
+    public ModelAndView showUsers(Pageable pageable) {
+        return getUsersView(userProfileService.findAll(pageable), pageable);
+    }
 
-        return pagingBuilder.getModelAndView(viewName, users, pageable);
+    @GetMapping("/users/{property}/{value}")
+    public ModelAndView showUsers(@PathVariable Map<String, String> pathVariables, Pageable pageable) {
+        return getUsersView(userProfileService.findByProperty(pathVariables.get("property"), pathVariables.get("value"), pageable), pageable);
     }
 
     @GetMapping("/admin/user/edit")

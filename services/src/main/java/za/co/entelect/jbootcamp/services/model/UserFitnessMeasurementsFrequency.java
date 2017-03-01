@@ -1,7 +1,7 @@
 package za.co.entelect.jbootcamp.services.model;
 
 public enum UserFitnessMeasurementsFrequency {
-    Daily("Daily"), Weekly("Weekly"), Monthly("Monthly");
+    Daily("Daily"), Monthly("Monthly");
 
     String userFitnessMeasurementsFrequency;
 

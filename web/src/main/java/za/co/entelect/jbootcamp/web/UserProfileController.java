@@ -59,10 +59,29 @@ public class UserProfileController {
         return this.deviceService.findAll();
     }
 
-    @GetMapping(value = {"", "/dashboard", "/dashboard/{measurementType}/{frequency}/{fromDate}/{toDate}"})
-    public ModelAndView root(@PathVariable Map<String, String> pathVariables) {
-
+    private ModelAndView getDashboardModelAndView(DashboardFilterObjectModel dashboardFilterObjectModel, UserFitnessMeasurementModel userFitnessMeasurementModel) {
+        if(dashboardFilterObjectModel == null) {
+            dashboardFilterObjectModel = new DashboardFilterObjectModel(new Date(), new Date());
+        }
         ModelAndView modelAndView = new ModelAndView("dashboard/dashboard");
+        List<UserFitnessMeasurementsFrequency> userFitnessMeasurementsFrequencies = Arrays.asList(UserFitnessMeasurementsFrequency.values());
+        modelAndView.addObject("allUserFitnessMeasurementsFrequencies",userFitnessMeasurementsFrequencies);
+        modelAndView.addObject("allMeasurementTypes", measurementTypeService.findAll());
+        modelAndView.addObject("dashboardFilterObject", dashboardFilterObjectModel);
+        modelAndView.addObject("measurementCalculation", userFitnessMeasurementModel);
+
+        return modelAndView;
+    }
+
+    @GetMapping({"", "/dashboard"})
+    public ModelAndView root() {
+        return getDashboardModelAndView(null, null);
+    }
+
+    @GetMapping("/dashboard/{measurementType}/{frequency}/{fromDate}/{toDate}")
+    public ModelAndView root(@PathVariable Map<String, String> pathVariables) {
+        DashboardFilterObjectModel dashboardFilterObjectModel = null;
+        UserFitnessMeasurementModel userFitnessMeasurementModel = null;
 
         if (pathVariables.containsKey("measurementType")
                 & pathVariables.containsKey("frequency")
@@ -74,28 +93,21 @@ public class UserProfileController {
             String measurementType = pathVariables.get("measurementType");
             UserFitnessMeasurementsFrequency frequency = UserFitnessMeasurementsFrequency.valueOf(pathVariables.get("frequency"));
 
-            UserFitnessMeasurementModel userFitnessMeasurementModel = userFitnessMeasurementService.getCalculatedMeasurements(
+            userFitnessMeasurementModel = userFitnessMeasurementService.getCalculatedMeasurements(
                     userProfileService.findByUsername(getPrincipal()).getId(),
                     measurementType,
                     fromDate,
                     toDate,
                     frequency);
 
-            modelAndView.addObject("measurementCalculation", userFitnessMeasurementModel);
-            modelAndView.addObject("dashboardFilterObject", new DashboardFilterObjectModel(
+            dashboardFilterObjectModel = new DashboardFilterObjectModel(
                     measurementType, frequency, fromDate, toDate
-            ));
-        }
-        else {
-            modelAndView.addObject("dashboardFilterObject", new DashboardFilterObjectModel(new Date(), new Date()));
+            );
         }
 
-        List<UserFitnessMeasurementsFrequency> userFitnessMeasurementsFrequencies = Arrays.asList(UserFitnessMeasurementsFrequency.values());
-        modelAndView.addObject("allUserFitnessMeasurementsFrequencies",userFitnessMeasurementsFrequencies);
-        modelAndView.addObject("allMeasurementTypes", measurementTypeService.findAll());
-
-        return modelAndView;
+        return getDashboardModelAndView(dashboardFilterObjectModel, userFitnessMeasurementModel);
     }
+
 
     @PostMapping({"/dashboard", "/"})
     public String getDashboardReport(@ModelAttribute DashboardFilterObjectModel dashboardFilterObjectModel) {

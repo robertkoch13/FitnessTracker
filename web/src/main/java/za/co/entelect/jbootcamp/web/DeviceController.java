@@ -44,19 +44,19 @@ public class DeviceController {
         return this.deviceManufacturerService.findAll();
     }
 
-    @RequestMapping({ "/devices/{property}/{value}", "/devices" })
-    public ModelAndView showDevices(@PathVariable Map<String, String> pathVariables, Pageable pageable) {
-
+    private ModelAndView getDevicesView(Page<Device> devices, Pageable pageable) {
         String viewName = "devices/devicesView";
-
-        Page<Device> devices;
-        if (pathVariables.containsKey("property") & pathVariables.containsKey("value")) {
-            devices = deviceService.findByProperty(pathVariables.get("property"), pathVariables.get("value"), pageable);
-        } else {
-            devices = deviceService.findAll(pageable);
-        }
-
         return pagingBuilder.getModelAndView(viewName, devices, pageable);
+    }
+
+    @GetMapping("/devices")
+    public ModelAndView showDevices(Pageable pageable) {
+        return getDevicesView(deviceService.findAll(pageable), pageable);
+    }
+
+    @GetMapping("/devices/{property}/{value}")
+    public ModelAndView showDevices(@PathVariable Map<String, String> pathVariables, Pageable pageable) {
+        return getDevicesView(deviceService.findByProperty(pathVariables.get("property"), pathVariables.get("value"), pageable), pageable);
     }
 
     @GetMapping("/devices/search")
@@ -94,19 +94,19 @@ public class DeviceController {
         return "redirect:/devices";
     }
 
-    @RequestMapping({"/devices/manufacturers/{property}/{value}", "/devices/manufacturers"})
-    public ModelAndView showDeviceManufacturers(@PathVariable Map<String, String> pathVariables, Pageable pageable) {
-
+    private ModelAndView getDevicesManufacturersView(Page<DeviceManufacturer> deviceManufacturers, Pageable pageable) {
         String viewName = "devices/deviceManufacturersView";
-
-        Page<DeviceManufacturer> deviceManufacturers;
-        if (pathVariables.containsKey("property") & pathVariables.containsKey("value")) {
-            deviceManufacturers = deviceManufacturerService.findByProperty(pathVariables.get("property"), pathVariables.get("value"), pageable);
-        } else {
-            deviceManufacturers = deviceManufacturerService.findAll(pageable);
-        }
-
         return pagingBuilder.getModelAndView(viewName, deviceManufacturers, pageable);
+    }
+
+    @GetMapping("/devices/manufacturers")
+    public ModelAndView showDeviceManufacturers(Pageable pageable) {
+        return getDevicesManufacturersView(deviceManufacturerService.findAll(pageable), pageable);
+    }
+
+    @GetMapping("/devices/manufacturers/{property}/{value}")
+    public ModelAndView showDeviceManufacturers(@PathVariable Map<String, String> pathVariables, Pageable pageable) {
+        return getDevicesManufacturersView(deviceManufacturerService.findByProperty(pathVariables.get("property"), pathVariables.get("value"), pageable), pageable);
     }
 
     @GetMapping("/admin/devicemanufacturer/add")
@@ -133,19 +133,19 @@ public class DeviceController {
         return "redirect:/devices/manufacturers";
     }
 
-    @RequestMapping({"/devices/types/{property}/{value}", "/devices/types"})
-    public ModelAndView showDeviceTypes(@PathVariable Map<String, String> pathVariables, Pageable pageable) {
-
+    private ModelAndView getDevicesTypesView(Page<DeviceType> deviceTypes, Pageable pageable) {
         String viewName = "devices/deviceTypesView";
-
-        Page<DeviceType> deviceTypes;
-        if (pathVariables.containsKey("property") & pathVariables.containsKey("value")) {
-            deviceTypes = deviceTypeService.findByProperty(pathVariables.get("property"), pathVariables.get("value"), pageable);
-        } else {
-            deviceTypes = deviceTypeService.findAll(pageable);
-        }
-
         return pagingBuilder.getModelAndView(viewName, deviceTypes, pageable);
+    }
+
+    @GetMapping("/devices/types")
+    public ModelAndView showDeviceTypes(Pageable pageable) {
+        return getDevicesTypesView(deviceTypeService.findAll(pageable), pageable);
+    }
+
+    @GetMapping("/devices/types/{property}/{value}")
+    public ModelAndView showDeviceTypes(@PathVariable Map<String, String> pathVariables, Pageable pageable) {
+        return getDevicesTypesView(deviceTypeService.findByProperty(pathVariables.get("property"), pathVariables.get("value"), pageable), pageable);
     }
 
     @GetMapping("/admin/devicetype/add")
